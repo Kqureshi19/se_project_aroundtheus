@@ -1,3 +1,4 @@
+/*Styles for the 1st page start here********************/
 .page {
   margin: 0 auto;
   min-width: 1100px;
@@ -5,4 +6,170 @@
   font-family: "Inter", "Arial", "sans-serif";
   font-size: 16px;
   line-height: 20px;
+}
+
+.header {
+  padding: 30px 80px 40px; /*30px top 80 left & right 40px bottom */
+  min-height: 720px;
+  max-height: 800px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column; /*this helps when we need to center the footer*/
+  margin-top: auto;
+  background-color: #ffffff;
+  justify-content: space-between;
+  position: relative;
+  background-color: #ffffff;
+  background-image: url(../images/background_header.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+/* We are turning parent container into a flexbox
+ so instead of columns, we are now working with rows*/
+.nav {
+  display: flex;
+  justify-content: space-between; /*We need space between the logo and links!*/
+}
+
+.nav__logo {
+  position: relative;
+  left: -50px;
+  width: 105px;
+  height: 39px;
+  margin-top: 30px;
+}
+
+.nav__links {
+  display: flex; /*the links need to be a row*/
+  padding: 0; /*resetting the margins to 0*/
+  margin: 0;
+  gap: 20px; /*the gap between links need to be there*/
+  list-style-type: none; /*remove the default bullet points styles*/
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  margin-top: 30px;
+}
+
+.nav__link {
+  color: #000;
+  text-decoration: none; /*remove the underline from the links*/
+}
+
+.header__title {
+  max-width: 729px;
+  font-size: 60px;
+  line-height: 72px;
+  margin: 183px 0 0; /*top margin is 183px*/
+  letter-spacing: -0.6px;
+  font-weight: normal; /* heavier font weight will make the letters bigger */
+}
+
+.header__description {
+  max-width: 683px;
+  font-family: "Noto Serif";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 30px;
+  letter-spacing: -0.6px;
+  margin: 28px 0 0; /*top margin is 28px*/
+}
+
+.header__image {
+  position: absolute; /*when using absolute positioning, need to use top/right instead of margin top/right */
+  top: 124px;
+  right: 5px;
+  max-width: 646px;
+  max-height: 568px;
+  z-index: 1;
+}
+
+.recipes__iframe {
+  width: 560px;
+  height: 315px;
+}
+
+.header__span-accent {
+  display: block; /*span are inline elements by default, so we are changing that*/
+  font-family: "Noto Serif";
+  font-style: italic;
+  font-weight: normal;
+  font-size: 60px;
+  line-height: 72px;
+  color: #2f80ed;
+}
+.header__footer {
+  display: flex; /*made it a flex container so we can have rows */
+  justify-content: space-between; /*we create space between the footer elements*/
+  margin-top: auto; /* we can do this since are have a flex-box and push it to the bottom of the contaienr*/
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #838383;
+  align-items: flex-end;
+}
+
+.header__paragraph {
+  margin: 0; /*Do not need space between the lines on the footer*/
+}
+
+/*Parent container is content class that has the background image and color*/
+.content {
+  background-image: url(../images/background_recipes.svg);
+  background-color: #0a2750;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+/*Styles for the 2nd page start here***********************************************************/
+
+.recipes {
+  padding: 100px 80px 215px; /*100 padding for top, 80 on left and 215 for bottom*/
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 44px;
+  line-height: 52px;
+  color: white;
+}
+
+.recipes__title {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 44px;
+  line-height: 52px;
+}
+
+.recipes__subtitle {
+  max-width: 438px;
+  font-family: "Noto Serif";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 30px;
+}
+
+.recipes__videos {
+  display: flex;
+  gap: 40px;
+  margin-top: 80px;
+  justify-content: center;
+}
+
+.recipes__video-caption {
+  display: flex;
+  justify-content: space-between;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  margin-bottom: 215px;
 }
