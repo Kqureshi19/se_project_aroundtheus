@@ -1,0 +1,60 @@
+.form {
+  /*need to restrict the width of the form block, otherwise the above selector will not do anything*/
+  max-width: 385px;
+}
+
+.form__fieldset {
+  display: flex; /*turn rows into rows then columns via the flex direction*/
+  flex-direction: column; /**these 2 are not needed**/
+  margin: 0;
+  border: none;
+  font-size: 16px;
+  line-height: 20px;
+}
+.form__label {
+  margin-bottom: 32px;
+  display: block; /*form labels are inline elements by default so we have to change them to block*/
+}
+.form__label_type_checkbox {
+  display: flex;
+  justify-content: center;
+}
+
+.form__input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 8px;
+}
+.form__button {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  border: none;
+  width: 100%;
+  padding: 0;
+  margin-bottom: 32px;
+  background: #2f80ed;
+  color: white;
+  border-radius: 30px;
+  min-width: 400px;
+  min-height: 60px;
+}
+.form__checkbox {
+  margin-bottom: 120px;
+  max-width: 20px;
+}
+
+.form__label_type_checkbox {
+  gap: 12px;
+}
+.form__input[type="text"],
+.form__input[type="number"],
+.form__input[type="datetime-local"],
+.form__input[type="email"] {
+  min-width: 400px;
+  min-height: 60px;
+  padding-left: 15px;
+}

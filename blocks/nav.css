@@ -1,0 +1,33 @@
+/* We are turning parent container into a flexbox
+ so instead of columns, we are now working with rows*/
+.nav {
+  display: flex;
+  justify-content: space-between; /*We need space between the logo and links!*/
+}
+
+.nav__logo {
+  position: relative;
+  left: -50px;
+  width: 105px;
+  height: 39px;
+  margin-top: 30px;
+}
+
+.nav__links {
+  display: flex; /*the links need to be a row*/
+  padding: 0; /*resetting the margins to 0*/
+  margin: 0;
+  gap: 20px; /*the gap between links need to be there*/
+  list-style-type: none; /*remove the default bullet points styles*/
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  margin-top: 30px;
+}
+
+.nav__link {
+  color: #000;
+  text-decoration: none; /*remove the underline from the links*/
+}

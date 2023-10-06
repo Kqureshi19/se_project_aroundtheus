@@ -1,0 +1,9 @@
+/*Styles for the 1st page start here, this is page class styles block********************/
+.page {
+  margin: 0 auto;
+  min-width: 1100px;
+  max-width: 1600px;
+  font-family: "Inter", "Arial", "sans-serif";
+  font-size: 16px;
+  line-height: 20px;
+}
