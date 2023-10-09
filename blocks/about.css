@@ -1,1 +1,78 @@
-<-- keyframes will go here-->
+.about {
+  position: relative;
+  color: #fff;
+  overflow: hidden;
+  display: flex;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+
+.about__title {
+  z-index: 1;
+  margin: 0;
+  max-width: 251px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 44px;
+  line-height: 52px;
+  position: relative;
+  margin-top: 100px;
+  margin-left: 80px;
+}
+
+.about__content {
+  z-index: 1;
+  font-family: "Noto Serif";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 30px;
+  max-width: 660px;
+  position: relative;
+  margin-top: 119px;
+  margin-bottom: 173px;
+  margin-right: 80px;
+}
+
+.about__circle {
+  background-color: #2f80ed;
+  width: 426px;
+  height: 426px;
+  border-radius: 50%;
+  position: absolute;
+  top: -152px;
+  left: -129px;
+  z-index: 0;
+}
+
+.about__paragraph {
+  font-family: "Noto Serif";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 30px;
+  color: #fff;
+  margin-top: 0;
+}
+
+.about__paragraph:last-child {
+  margin-bottom: 0;
+}
+
+.about__circle_animation_blurred {
+  animation: pulsate 1.3s ease-in-out infinite;
+}
+
+@keyframes pulsate {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    scale: 1.4;
+    opacity: 0;
+  }
+}

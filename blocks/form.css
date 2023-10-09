@@ -11,10 +11,12 @@
   font-size: 16px;
   line-height: 20px;
 }
+
 .form__label {
   margin-bottom: 32px;
   display: block; /*form labels are inline elements by default so we have to change them to block*/
 }
+
 .form__label_type_checkbox {
   display: flex;
   justify-content: center;
@@ -25,7 +27,9 @@
   width: 100%;
   box-sizing: border-box;
   margin-top: 8px;
+  padding: 0;
 }
+
 .form__button {
   font-family: Inter;
   font-style: normal;
@@ -41,7 +45,14 @@
   border-radius: 30px;
   min-width: 400px;
   min-height: 60px;
+  box-sizing: border-box;
+  opacity: 1;
 }
+
+.form__button:hover {
+  opacity: 0.7;
+}
+
 .form__checkbox {
   margin-bottom: 120px;
   max-width: 20px;
@@ -50,6 +61,7 @@
 .form__label_type_checkbox {
   gap: 12px;
 }
+
 .form__input[type="text"],
 .form__input[type="number"],
 .form__input[type="datetime-local"],

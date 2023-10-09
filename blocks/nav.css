@@ -30,4 +30,9 @@
 .nav__link {
   color: #000;
   text-decoration: none; /*remove the underline from the links*/
+  transition: 0.6s ease-in-out;
+}
+
+.nav__link:hover {
+  color: #2f80ed;
 }

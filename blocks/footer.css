@@ -9,11 +9,14 @@
   box-sizing: border-box;
   padding: 60px 100px 60px 80px;
 }
+
 .footer__columns {
   display: flex;
 }
+
 .footer__column {
 }
+
 .footer__column_social-heading {
   margin-left: auto;
 }
@@ -22,17 +25,21 @@ footer__logo {
   width: 105px;
   height: 39px;
 }
+
 .footer__list {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
+
 .footer__list-item {
   margin: 0 0 16px;
 }
+
 .footer__list-item:last-child {
   margin-bottom: 0;
 }
+
 .footer__social-heading {
   font-family: "Inter";
   font-style: normal;
@@ -41,17 +48,21 @@ footer__logo {
   line-height: 20px;
   margin: 0 0 20px;
 }
+
 .footer__social-link {
   font-weight: normal;
   color: white;
   text-decoration: none;
+  transition: 0.6s ease-in-out;
 }
+
 .footer__social-link:hover {
   color: #c1c1c1;
 }
 
 .footer__social-icon {
 }
+
 .footer__copyright {
   font-weight: normal;
   margin-top: 108px;

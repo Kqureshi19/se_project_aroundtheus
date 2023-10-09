@@ -13,4 +13,5 @@ This is the second project of the Software Engineering program at TripleTen. It 
 
 ## Plan on improving the project
 
-Add your ideas here :)
+Can add functinality to the form page and additional features using JavaScript.
+Can make it more interactive and have a more analytical target audience using more analytical features that shows graphs that display input history.
