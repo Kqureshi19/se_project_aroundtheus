@@ -4,6 +4,7 @@
 }
 
 .form__fieldset {
+  padding: 0;
   display: flex; /*turn rows into rows then columns via the flex direction*/
   flex-direction: column; /**these 2 are not needed**/
   margin: 0;
@@ -20,6 +21,7 @@
 .form__label_type_checkbox {
   display: flex;
   justify-content: center;
+  margin-bottom: 0;
 }
 
 .form__input {
@@ -28,10 +30,14 @@
   box-sizing: border-box;
   margin-top: 8px;
   padding: 0;
+  color: #838383;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 4px;
 }
 
 .form__button {
-  font-family: Inter;
+  font-family: Inter, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -42,8 +48,7 @@
   margin-bottom: 32px;
   background: #2f80ed;
   color: white;
-  border-radius: 30px;
-  min-width: 400px;
+  border-radius: 4px;
   min-height: 60px;
   box-sizing: border-box;
   opacity: 1;
@@ -54,8 +59,8 @@
 }
 
 .form__checkbox {
-  margin-bottom: 120px;
-  max-width: 20px;
+  width: 20px;
+  height: 20px;
 }
 
 .form__label_type_checkbox {
@@ -66,7 +71,6 @@
 .form__input[type="number"],
 .form__input[type="datetime-local"],
 .form__input[type="email"] {
-  min-width: 400px;
   min-height: 60px;
   padding-left: 15px;
 }

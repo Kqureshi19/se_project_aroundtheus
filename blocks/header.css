@@ -9,11 +9,12 @@
   background-color: #ffffff;
   justify-content: space-between;
   position: relative;
-  background-color: #ffffff;
   background-image: url(../images/background_header.svg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  z-index: 1;
+  box-sizing: border-box;
 }
 
 .header__title {
@@ -27,7 +28,7 @@
 
 .header__description {
   max-width: 683px;
-  font-family: "Noto Serif";
+  font-family: "Noto Serif", "Times New Roman", Times, serif;
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
@@ -42,12 +43,12 @@
   right: 5px;
   max-width: 646px;
   max-height: 568px;
-  z-index: 1;
+  z-index: -1;
 }
 
 .header__span-accent {
   display: block; /*span are inline elements by default, so we are changing that*/
-  font-family: "Noto Serif";
+  font-family: "Noto Serif", "Times New Roman", Times, serif;
   font-style: italic;
   font-weight: normal;
   font-size: 60px;
@@ -59,7 +60,7 @@
   display: flex; /*made it a flex container so we can have rows */
   justify-content: space-between; /*we create space between the footer elements*/
   margin-top: auto; /* we can do this since are have a flex-box and push it to the bottom of the contaienr*/
-  font-family: "Inter";
+  font-family: "Inter", Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;

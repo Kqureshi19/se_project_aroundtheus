@@ -109,6 +109,7 @@
                   id="Name*"
                   name="Name*"
                   placeholder="Name Surname"
+                  required
                 />
               </label>
               <label for="Number-of-guests" class="form__label">
@@ -119,6 +120,7 @@
                   id="Number-of-guests"
                   name="Number-of-guests"
                   placeholder="1-8"
+                  required
                 />
               </label>
               <label for="datetime-local" class="form__label">
@@ -128,6 +130,7 @@
                   class="form__input"
                   id="datetime-local"
                   name="datetime-local"
+                  required
                 />
               </label>
               <label for="email" class="form__label">
@@ -138,16 +141,18 @@
                   id="email"
                   name="email"
                   placeholder="email@email.com"
+                  required
                 />
               </label>
             </fieldset>
-            <button class="form__button">Book a table</button>
+            <button class="form__button" type="submit">Book a table</button>
             <label for="checkbox" class="form__label form__label_type_checkbox">
               <input
                 type="checkbox"
                 class="form__checkbox"
                 id="checkbox"
                 name="checkbox"
+                required
               />
               I agree with the terms of use
             </label>
@@ -239,56 +244,62 @@
         </section>
 
         <section id="about" class="about">
-        
-          <h2 class="about__title">About the</br> coffee shop</h2>
+          <h2 class="about__title">About the <span>coffee shop</span></h2>
           <div class="about__content">
-            
             <p class="about__paragraph">
-              Our coffee shop is located in the Triple Peaks Library. It features
-              6 tables and free WiFi.</p>
+              Our coffee shop is located in the Triple Peaks Library. It
+              features 6 tables and free WiFi.
+            </p>
             <p class="about__paragraph">
               Our main mission is keeping guests cozy and energized.
             </p>
             <p class="about__paragraph">
-              Besides that we try to reduce our environmental impact — so we don't sell
-              single-use cups. But you can buy one of our reusable cups! 
+              Besides that we try to reduce our environmental impact — so we
+              don't sell single-use cups. But you can buy one of our reusable
+              cups!
             </p>
-            </div>
-            <div class="about__circle">
-            </div>
-            <div class="about__circle about__circle_animation_blurred">
-            </div>
+          </div>
+          <div class="about__circle"></div>
+          <div class="about__circle about__circle_animation_blurred"></div>
         </section>
       </main>
       <footer class="footer">
         <div class="footer__columns">
           <div class="footer__column">
-            <img src="./images/logo_coffeeshop_light.svg" 
-            alt="TripleTen logo" 
-            class="footer__logo">
+            <img
+              src="./images/logo_coffeeshop_light.svg"
+              alt="TripleTen logo"
+              class="footer__logo"
+            />
           </div>
-          
-          <div class="footer__column footer__column_social-heading">
+
+          <div class="footer__column footer__column_content_social">
             <h3 class="footer__social-heading">Social media</h3>
             <ul class="footer__list">
               <li class="footer__list-item">
                 <a href="#" class="footer__social-link">
-                  <img src="./images/facebook_white.svg" 
-                  alt="Facebook logo" 
-                  class="footer__social-icon">
-                  Facebook</a>
+                  <img
+                    src="./images/facebook_white.svg"
+                    alt="Facebook logo"
+                    class="footer__social-icon"
+                  />
+                  Facebook</a
+                >
               </li>
               <li class="footer__list-item">
                 <a href="#" class="footer__social-link">
-                  <img src="./images/instagram_white.svg" 
-                  alt="Instagram logo" 
-                  class="footer__social-icon">
-                  Instagram</a>
+                  <img
+                    src="./images/instagram_white.svg"
+                    alt="Instagram logo"
+                    class="footer__social-icon"
+                  />
+                  Instagram</a
+                >
               </li>
             </ul>
           </div>
         </div>
-          <p class="footer__copyright">&copy;2023 Khurram Qureshi</p>
+        <p class="footer__copyright">&copy;2023 Khurram Qureshi</p>
       </footer>
     </div>
   </body>
