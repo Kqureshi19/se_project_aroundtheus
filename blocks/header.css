@@ -1,74 +1,29 @@
+/*default display is desktop that starts at ~775px, also
+we leave out font styles here, since the header is using a logo*/
+
 .header {
-  padding: 30px 80px 40px; /*30px top 80 left & right 40px bottom */
-  min-height: 720px;
-  max-height: 800px;
-  height: 100vh;
-  display: flex;
-  flex-direction: column; /*this helps when we need to center the footer*/
-  margin-top: auto;
-  background-color: #ffffff;
-  justify-content: space-between;
-  position: relative;
-  background-image: url(../images/background_header.svg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  z-index: 1;
-  box-sizing: border-box;
+  margin-top: 45px;
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+  padding-bottom: 41px;
+  width: 100%;
 }
 
-.header__title {
-  max-width: 729px;
-  font-size: 60px;
-  line-height: 72px;
-  margin: 183px 0 0; /*top margin is 183px*/
-  letter-spacing: -0.6px;
-  font-weight: normal; /* heavier font weight will make the letters bigger */
+.header__logo {
+  max-width: 173px;
+  max-height: 33px;
 }
 
-.header__description {
-  max-width: 683px;
-  font-family: "Noto Serif", "Times New Roman", Times, serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 20px;
-  line-height: 30px;
-  letter-spacing: -0.6px;
-  margin: 28px 0 0; /*top margin is 28px*/
-}
+@media screen and (max-width: 770px) {
+  .header {
+    padding-top: 28px;
+    padding-left: 27px;
+    padding-bottom: 32px;
+    max-width: 100%;
+    margin: 0;
+  }
 
-.header__image {
-  position: absolute; /*when using absolute positioning, need to use top/right instead of margin top/right */
-  top: 124px;
-  right: 5px;
-  max-width: 646px;
-  max-height: 568px;
-  z-index: -1;
-}
-
-.header__span-accent {
-  display: block; /*span are inline elements by default, so we are changing that*/
-  font-family: "Noto Serif", "Times New Roman", Times, serif;
-  font-style: italic;
-  font-weight: normal;
-  font-size: 60px;
-  line-height: 72px;
-  color: #2f80ed;
-}
-
-.header__footer {
-  display: flex; /*made it a flex container so we can have rows */
-  justify-content: space-between; /*we create space between the footer elements*/
-  margin-top: auto; /* we can do this since are have a flex-box and push it to the bottom of the contaienr*/
-  font-family: "Inter", Arial, Helvetica, sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 20px;
-  color: #838383;
-  align-items: flex-end;
-}
-
-.header__paragraph {
-  margin: 0; /*Do not need space between the lines on the footer*/
+  .header__logo {
+    max-width: 126px;
+    max-height: 24px;
+  }
 }
