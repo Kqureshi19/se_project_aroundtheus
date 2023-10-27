@@ -1,5 +1,6 @@
 /*default display is desktop that starts at ~775px, also
-we leave out font styles here, since the header is using a logo*/
+we leave out font styles here, since the header is using a logo
+git push 11-27-2023v1.1*/
 
 .header {
   margin-top: 45px;
