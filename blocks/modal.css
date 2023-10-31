@@ -1,0 +1,76 @@
+.modal {
+  color: black;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 19px;
+  /*can delete the last 2 and put margin:auto in modal container to achieve same result*/
+}
+
+.modal__container {
+  position: relative;
+  background-color: #fff;
+  padding: 36px;
+  border-radius: 10px;
+  width: 43opx;
+  height: 330px;
+  padding: 36px;
+}
+
+.modal__heading {
+  color: #000;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+}
+
+.modal__close {
+  background-image: url(../images/Close-Icon.svg);
+  width: 40px;
+  height: 40px;
+  border: none;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  block-size: contain;
+  position: absolute;
+  top: -45px; /*same thing as bottom left:calc(100%+5px*/
+  right: -45px;
+  cursor: pointer;
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 10px;
+}
+
+modal__input-title {
+  border-bottom: 1px rgba(0, 0, 0, 0.2);
+  width: 358px;
+  color: #000;
+  border-width: 0px;
+  border-right: none;
+  border-left: #fff;
+}
+
+modal__input-description {
+}
+
+.modal__save-button {
+  background-color: #000;
+  color: #fff;
+  border-radius: 2px;
+  cursor: pointer;
+  width: 358px;
+  height: 50px;
+}
