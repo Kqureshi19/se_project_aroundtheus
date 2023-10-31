@@ -54,16 +54,22 @@
   border-radius: 10px;
 }
 
-modal__input-title {
+.modal__input-title {
+  font-family: Inter, arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border: 0;
   border-bottom: 1px rgba(0, 0, 0, 0.2);
   width: 358px;
   color: #000;
-  border-width: 0px;
-  border-right: none;
-  border-left: #fff;
+  margin-bottom: 29.74px;
 }
 
-modal__input-description {
+.modal__input-description {
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .modal__save-button {
@@ -73,4 +79,5 @@ modal__input-description {
   cursor: pointer;
   width: 358px;
   height: 50px;
+  margin-top: 48px;
 }
