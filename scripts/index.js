@@ -49,7 +49,6 @@ const profileDescriptionInput = document.querySelector(
 );
 const profileEditForm = profileEditModal.querySelector(".modal__form");
 const cardListElement = document.querySelector(".cards__list");
-console.log("1" + cardListElement);
 
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
@@ -58,8 +57,20 @@ const cardTemplate =
 /*  Functions                   */
 /*----------------------------------------------------------------------------------------------*/
 
-function closePopup() {
+function openModal() {
+  profileEditModal.classList.add("modal_opened");
+  return;
+}
+
+function closeModal() {
   profileEditModal.classList.remove("modal_opened");
+  return;
+}
+
+function fillProfileForm() {
+  profileTitleInput.value = profileTitle.textContent;
+  profileDescriptionInput.value = profileDescription.textContent;
+  return;
 }
 
 /*
@@ -82,7 +93,6 @@ function getCardElement(cardData) {
   cardImageElement.alt = cardData.name;
   //set the card title to the name field of the object, too
   cardTitleElement.textContent = cardData.name;
-
   return cardElement;
 }
 
@@ -94,28 +104,28 @@ function handleProfileEditSubmit(e) {
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
-  closePopup();
+  closeModal();
+  return;
 }
 
 /*---------------------------------------------------------------------------------------------*/
 /*  Event Listeners            */
 /*--------------------------------------------------------------------------------------------*/
 profileEditButton.addEventListener("click", () => {
-  profileTitleInput.value = profileTitle.textContent;
-  profileDescriptionInput.value = profileDescription.textContent;
-  profileEditModal.classList.add("modal_opened");
+  fillProfileForm();
+  openModal();
 });
 
-profileEditModalCloseButton.addEventListener("click", closePopup);
+profileEditModalCloseButton.addEventListener("click", closeModal);
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
 /*for (let i = 0; i < initialCards.length; i++) {
   const card = initialCards[i];
-} */
+} alternative iterative statement that could've have been used*/
 
-console.log("Hi HI HI");
-console.log(initialCards[4]);
+//Iterate through the card data that we initially have and
+//run the function getCardElement on each index
 initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);
 
