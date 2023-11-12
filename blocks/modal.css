@@ -80,16 +80,6 @@
   min-height: 60px;
 }
 
-.modal__input:last-of-type {
-  border: 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  width: 358px;
-}
-
-.modal__input:last-of-type[type="text"] {
-  min-height: 60px;
-}
-
 .modal__save-button {
   background-color: #000;
   color: #fff;
@@ -127,10 +117,6 @@
 
   .modal__input {
     width: 100%;
-  }
-
-  .modal__input:last-of-type {
-    width: 238px;
   }
 
   .modal__save-button {
