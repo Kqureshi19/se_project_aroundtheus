@@ -37,6 +37,10 @@
   height: 23px;
 }
 
+.modal__heading-card {
+  width: 430px;
+}
+
 .modal__close {
   background-image: url(../images/Close-Icon.svg);
   width: 40px;

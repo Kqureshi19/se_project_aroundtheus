@@ -113,10 +113,12 @@ function getCardElement(cardData) {
   //Step 5-Deleteing a card step 6 12:40
 
   //1-find delete button
-  //const deleteCardElement = document.querySelector(".card__trash-button");
   //2-add event listener to the delete button
-  //deleteCardElement.addEventListener("click");
   //3-to remove card-call method on html element (cardElement.remove()
+  const deleteCardElement = cardElement.querySelector(".card__trash-button");
+  deleteCardElement.addEventListener("click", () => {
+    cardElement.remove("card");
+  });
 
   likeButton.addEventListener("click", () => {
     likeButton.classList.toggle("card__like-button_active");
@@ -194,8 +196,3 @@ likeButtons.forEach((likeButton) => {
     likeButton.classList.toggle("card__like-button_active");
   });
 }); */
-
-const deleteCardElement = document.querySelector(".card__trash-button");
-deleteCardElement.addEventListener("click", () => {
-  cardElement.remove("card");
-});
