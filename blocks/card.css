@@ -35,6 +35,7 @@
   align-items: center;
   justify-content: space-between;
 }
+
 .card__like-button {
   background: transparent url(../images/like-inactive.svg) center no-repeat;
   width: 21px;
@@ -45,8 +46,24 @@
   transition: 0.4s;
 }
 
+.card__like-button_active {
+  background-image: url(../images/like-active.svg);
+}
+
 .card__like-button:hover {
   opacity: 0.5;
+}
+
+.card__trash-button {
+  background: transparent url(../images/Trash.svg) center no-repeat;
+  width: 18px;
+  height: 19.3px;
+  align-self: flex-end;
+  cursor: pointer;
+  transition: 0.4s;
+  border: none;
+  margin-right: 15px;
+  margin-top: 18px;
 }
 
 @media screen and (max-width: 568px) {

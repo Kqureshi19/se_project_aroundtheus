@@ -103,10 +103,24 @@ note: cloneNode() method copies the element, but doesn't add it to the DOM
 i.e. you have to append it
 */
 
+// finding the like button for the card we are currently generating
+//when we return cardelement, its already setup for a like button that is listening for a click
 function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImageElement = cardElement.querySelector(".card__image");
   const cardTitleElement = cardElement.querySelector(".card__title");
+  const likeButton = cardElement.querySelector(".card__like-button");
+  //Step 5-Deleteing a card step 6 12:40
+
+  //1-find delete button
+  //const deleteCardElement = document.querySelector(".card__trash-button");
+  //2-add event listener to the delete button
+  //deleteCardElement.addEventListener("click");
+  //3-to remove card-call method on html element (cardElement.remove()
+
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("card__like-button_active");
+  });
 
   cardImageElement.src = cardData.link;
   cardImageElement.alt = cardData.name;
@@ -173,3 +187,15 @@ addCardModalCloseButton.addEventListener("click", () =>
 //Iterate through the card data that we initially have and
 //run the function getCardElement on each index
 initialCards.forEach((cardData) => renderCard(cardData, cardsWrap));
+
+/*const likeButtons = document.querySelectorAll(".card__like-button");
+likeButtons.forEach((likeButton) => {
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("card__like-button_active");
+  });
+}); */
+
+const deleteCardElement = document.querySelector(".card__trash-button");
+deleteCardElement.addEventListener("click", () => {
+  cardElement.remove("card");
+});
