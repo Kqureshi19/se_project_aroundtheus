@@ -38,9 +38,12 @@ const initialCards = [
 
 const profileEditButton = document.querySelector("#profile-edit-button");
 const profileEditModal = document.querySelector("#profile-edit-modal");
-const profileEditModalCloseButton = document.querySelector(
+const addCardModal = document.querySelector("#add-card-modal");
+const profileEditModalCloseButton = profileEditModal.querySelector(
   "#profile-edit-modal-close-button"
 );
+const addNewCardButton = document.querySelector(".profile__add-button");
+
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 const profileTitleInput = document.querySelector("#profile-title-input");
@@ -57,13 +60,13 @@ const cardTemplate =
 /*                                  Functions                                 */
 /* -------------------------------------------------------------------------- */
 
-function openModal() {
-  profileEditModal.classList.add("modal_opened");
+function openModal(modal) {
+  modal.classList.add("modal_opened");
   return;
 }
 
-function closeModal() {
-  profileEditModal.classList.remove("modal_opened");
+function closeModal(modal) {
+  modal.classList.remove("modal_opened");
   return;
 }
 
@@ -78,7 +81,7 @@ Line 1: Clone the template element with all its content and store it in a cardEl
 Line 2 & 3: Access the card title and image and store them in variables
 Line 4: Set the path to the image to the link field of the object
 Line 5: Set the image alt text to the name field of the object
-set the card title to the name field of the object, too
+Line 6: Set the card title to the name field of the object, too
 return the ready HTML element with the filled-in data
 note: cloneNode() method copies the element, but doesn't add it to the DOM
 i.e. you have to append it
@@ -88,11 +91,11 @@ function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImageElement = cardElement.querySelector(".card__image");
   const cardTitleElement = cardElement.querySelector(".card__title");
+
   cardImageElement.src = cardData.link;
-  //cardElement.querySelector(".img src").src = cardImageElement;
   cardImageElement.alt = cardData.name;
-  //set the card title to the name field of the object, too
   cardTitleElement.textContent = cardData.name;
+
   return cardElement;
 }
 
@@ -112,14 +115,21 @@ function handleProfileEditSubmit(e) {
 /*                               Event Listeners                              */
 /* -------------------------------------------------------------------------- */
 
-profileEditButton.addEventListener("click", () => {
-  fillProfileForm();
-  openModal();
-});
+//profileEditButton.addEventListener("click", () => {
+// fillProfileForm();
+// openModal();
+//});
 
-profileEditModalCloseButton.addEventListener("click", closeModal);
+profileEditButton.addEventListener("click", () => openModal(profileEditModal));
+
+//profileEditModalCloseButton.addEventListener("click", closeModal);
+profileEditModalCloseButton.addEventListener("click", () =>
+  closeModal(profileEditModal)
+);
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
+//add new card button
+addNewCardButton.addEventListener("click", () => openModal(addCardModal));
 
 /*for (let i = 0; i < initialCards.length; i++) {
   const card = initialCards[i];
@@ -131,6 +141,5 @@ initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);
 
   //return cardElement;
-
   cardListElement.prepend(cardElement);
 });
