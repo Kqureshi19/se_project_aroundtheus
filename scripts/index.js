@@ -39,12 +39,24 @@ const initialCards = [
 const profileEditButton = document.querySelector("#profile-edit-button");
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const addCardModal = document.querySelector("#add-card-modal");
+const previewCardModal = document.querySelector("#preview-card-modal");
+const modalPreviewImageElement = document.querySelector(
+  ".modal__preview-image"
+);
+//console.log(previewCardModal);
+console.log(modalPreviewImageElement);
+
 const profileEditModalCloseButton = profileEditModal.querySelector(
   "#profile-edit-modal-close-button"
 );
+
 const addCardModalCloseButton = addCardModal.querySelector(
   "#profile-edit-modal-close-button"
 );
+const previewCardModalCloseButton = previewCardModal.querySelector(
+  "#profile-edit-modal-close-button"
+);
+
 const addNewCardButton = document.querySelector(".profile__add-button");
 
 const profileTitle = document.querySelector(".profile__title");
@@ -119,7 +131,25 @@ function getCardElement(cardData) {
   deleteCardElement.addEventListener("click", () => {
     cardElement.remove("card");
   });
+  //Opening the Picture Modal Steps:
+  //1-call your openModal function, passing it the modal as an argument
+  //2-set the src of popup image element
+  //3-set the alt of popup image element
+  //4-set the text of popup caption element
+  cardImageElement.addEventListener("click", () => {
+    //console.log(modalPreviewImageElement.src);
+    const modalCaption = document.querySelector(".modal__caption");
+    openModal(previewCardModal);
 
+    modalPreviewImageElement.src = cardData.link;
+    modalPreviewImageElement.alt = cardData.name;
+    modalCaption.textContent = cardData.name;
+  });
+  //modalPreviewImageElement.alt = cardTitleElement;
+
+  //2-take the openModal function you created earlier previewImageModal
+  //would have to add the previewImageModal to your existing HTML (before card modal)
+  //add previeImageMOdal to the above elements (find comment)
   likeButton.addEventListener("click", () => {
     likeButton.classList.toggle("card__like-button_active");
   });
@@ -180,6 +210,10 @@ profileEditButton.addEventListener("click", () => {
 addNewCardButton.addEventListener("click", () => openModal(addCardModal));
 addCardModalCloseButton.addEventListener("click", () =>
   closeModal(addCardModal)
+);
+
+previewCardModalCloseButton.addEventListener("click", () =>
+  closeModal(previewCardModal)
 );
 
 /*for (let i = 0; i < initialCards.length; i++) {

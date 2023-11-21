@@ -99,6 +99,11 @@
   opacity: 0.5;
 }
 
+.modal__preview-image {
+  max-width: 75vw;
+  max-height: 75vh;
+}
+
 @media screen and (max-width: 620px) {
   .modal__container {
     max-width: 282px;
