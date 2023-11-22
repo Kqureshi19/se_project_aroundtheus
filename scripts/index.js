@@ -33,6 +33,12 @@ const initialCards = [
 //console.log(typeof initialCards);
 
 /* -------------------------------------------------------------------------- */
+/*                                Card Template                               */
+/* -------------------------------------------------------------------------- */
+const cardTemplate =
+  document.querySelector("#card-template").content.firstElementChild;
+
+/* -------------------------------------------------------------------------- */
 /*                                  Elements                                  */
 /* -------------------------------------------------------------------------- */
 
@@ -69,9 +75,6 @@ const profileEditForm = profileEditModal.querySelector(".modal__form");
 const addCardFormElement = addCardModal.querySelector(".modal__form");
 const cardsWrap = document.querySelector(".cards__list");
 
-const cardTemplate =
-  document.querySelector("#card-template").content.firstElementChild;
-
 const cardTitleInput = addCardFormElement.querySelector(
   ".modal__input_type_title"
 );
@@ -102,6 +105,43 @@ function fillProfileForm() {
 function renderCard(cardData, wrapper) {
   const cardElement = getCardElement(cardData);
   wrapper.prepend(cardElement);
+  return;
+}
+
+//1-find delete button
+//2-add event listener to the delete button
+//3-to remove card-call method on html element (cardElement.remove()
+function pressDeleteButton(cardElement) {
+  const deleteCardElement = cardElement.querySelector(".card__trash-button");
+  deleteCardElement.addEventListener("click", () => {
+    cardElement.remove("card");
+    console.log("I removed the card YAY :)");
+    return;
+  });
+}
+function toggleLikeButton(cardElement) {
+  const likeButton = cardElement.querySelector(".card__like-button");
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("card__like-button_active");
+    return;
+  });
+}
+
+/*Opening the Picture Modal Steps:
+ 1-call your openModal function, passing it the modal as an argument
+ 2-set the src of popup image element
+ 3-set the alt of popup image element
+ 4-set the text of popup caption element*/
+
+function previewCardImage(cardImageElement, cardTitleElement) {
+  cardImageElement.addEventListener("click", () => {
+    const modalCaption = document.querySelector(".modal__caption");
+    openModal(previewCardModal);
+    modalPreviewImageElement.src = cardImageElement.src;
+    modalPreviewImageElement.alt = cardImageElement.alt;
+    modalCaption.textContent = cardTitleElement.textContent;
+    return;
+  });
 }
 
 /*
@@ -110,49 +150,21 @@ Line 2 & 3: Access the card title and image and store them in variables
 Line 4: Set the path to the image to the link field of the object
 Line 5: Set the image alt text to the name field of the object
 Line 6: Set the card title to the name field of the object, too
-return the ready HTML element with the filled-in data
+Return the ready HTML element with the filled-in data
 note: cloneNode() method copies the element, but doesn't add it to the DOM
 i.e. you have to append it
 */
 
 // finding the like button for the card we are currently generating
-//when we return cardelement, its already setup for a like button that is listening for a click
+//when we return cardelement, its already setup for a like/delete/previewcard button that is listening for a click
 function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImageElement = cardElement.querySelector(".card__image");
   const cardTitleElement = cardElement.querySelector(".card__title");
-  const likeButton = cardElement.querySelector(".card__like-button");
-  //Step 5-Deleteing a card step 6 12:40
 
-  //1-find delete button
-  //2-add event listener to the delete button
-  //3-to remove card-call method on html element (cardElement.remove()
-  const deleteCardElement = cardElement.querySelector(".card__trash-button");
-  deleteCardElement.addEventListener("click", () => {
-    cardElement.remove("card");
-  });
-  //Opening the Picture Modal Steps:
-  //1-call your openModal function, passing it the modal as an argument
-  //2-set the src of popup image element
-  //3-set the alt of popup image element
-  //4-set the text of popup caption element
-  cardImageElement.addEventListener("click", () => {
-    //console.log(modalPreviewImageElement.src);
-    const modalCaption = document.querySelector(".modal__caption");
-    openModal(previewCardModal);
-
-    modalPreviewImageElement.src = cardData.link;
-    modalPreviewImageElement.alt = cardData.name;
-    modalCaption.textContent = cardData.name;
-  });
-  //modalPreviewImageElement.alt = cardTitleElement;
-
-  //2-take the openModal function you created earlier previewImageModal
-  //would have to add the previewImageModal to your existing HTML (before card modal)
-  //add previeImageMOdal to the above elements (find comment)
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("card__like-button_active");
-  });
+  pressDeleteButton(cardElement);
+  previewCardImage(cardImageElement, cardTitleElement);
+  toggleLikeButton(cardElement);
 
   cardImageElement.src = cardData.link;
   cardImageElement.alt = cardData.name;
