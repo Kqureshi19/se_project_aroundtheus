@@ -60,7 +60,7 @@ const addCardModalCloseButton = addCardModal.querySelector(
   "#add-card-modal-close-button"
 );
 const previewCardModalCloseButton = previewCardModal.querySelector(
-  "#profile-edit-modal-close-button"
+  "#preview-card-modal-close-button"
 );
 
 const addNewCardButton = document.querySelector(".profile__add-button");
