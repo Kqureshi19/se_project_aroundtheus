@@ -109,6 +109,10 @@
   min-height: 60px;
 }
 
+.modal__input[type="url"] {
+  min-height: 60px;
+}
+
 .modal__save-button {
   background-color: #000;
   color: #fff;
