@@ -72,22 +72,35 @@
         ></button>
         <h2 class="modal__heading">Edit Profile</h2>
         <form class="modal__form" id="edit-card-form">
-          <input
-            class="modal__input"
-            name="title"
-            id="profile-title-input"
-            placeholder="Name"
-            type="text"
-            required
-          />
-          <input
-            class="modal__input"
-            name="description"
-            id="profile-description-input"
-            placeholder="Description"
-            type="text"
-            required
-          />
+          <label class="modal__label">
+            <input
+              class="modal__input"
+              name="title"
+              id="profile-title-input"
+              placeholder="Name"
+              type="text"
+              minlength="2"
+              maxlength="40"
+              required
+            />
+            <span class="popup__error" id="profile-title-input-error"></span>
+          </label>
+          <label class="modal__label">
+            <input
+              class="modal__input"
+              name="description"
+              id="profile-description-input"
+              placeholder="Description"
+              type="text"
+              minlength="2"
+              maxlength="200"
+              required
+            />
+            <span
+              class="popup__error"
+              id="profile-description-input-error"
+            ></span>
+          </label>
           <button class="modal__save-button" type="submit">Save</button>
         </form>
       </div>
