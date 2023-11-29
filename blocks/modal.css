@@ -91,6 +91,9 @@
   background: #fff;
   border-radius: 10px;
 }
+.modal__form [type="text"]:invalid {
+  border-bottom: 1px solid #ff0000;
+}
 
 .modal__input {
   font-family: Inter, arial, sans-serif;
@@ -113,6 +116,10 @@
   min-height: 60px;
 }
 
+.modal__input:invalid {
+  border-bottom: 1px solid #ff0000;
+}
+
 .modal__save-button {
   background-color: #000;
   color: #fff;
@@ -124,6 +131,10 @@
   margin-bottom: 36.51px;
 }
 
+.modal__save-button_disabled {
+  opacity: 0.1;
+}
+
 .modal__save-button:hover {
   opacity: 0.5;
 }
@@ -133,8 +144,8 @@
   max-height: 75vh;
 }
 
-.popup__error {
-  color: red;
+.modal__error {
+  color: #ff0000;
 }
 
 @media screen and (max-width: 620px) {
