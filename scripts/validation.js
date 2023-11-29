@@ -1,6 +1,6 @@
-// enabling validation by calling enableValidation()
-// pass all the settings on call
-//spread operator is the same as array.from with few very minor differences
+// Enabling validation by calling enableValidation()
+// Pass all the settings on call
+//Spread operator is the same as array.from with few very minor differences
 
 /* -------------------------------------------------------------------------- */
 /*                                  Functions                                 */
@@ -41,8 +41,8 @@ function hideInputError(
   errorMessageElement.textContent = "";
   errorMessageElement.classList.remove(errorClass);
 }
-//will actually check the validity of the input
-//will run everytime a user puts an input into the form
+//Check the validity of the input
+//Will run everytime a user puts an input into the form
 function checkInputValidity(formElement, inputElement, options) {
   if (!inputElement.validity.valid) {
     return showInputError(formElement, inputElement, options);
@@ -93,7 +93,7 @@ function setEventListeners(formElement, options) {
     });
   });
 }
-//spread operator workst the same way as array.from,
+//spread operator works the same way as array.from,
 //loop through all the buttons and add event listeners and prevent reloading the page
 function enableValidation(options) {
   const formElements = [...document.querySelectorAll(options.formSelector)];
@@ -105,15 +105,15 @@ function enableValidation(options) {
 
     setEventListeners(formElement, options);
     //Pseudo Code:
-    // look for all inputs inside of form
-    //loop through all the inputs to see if all are valid
-    // if  input is not valid, grab the validation message
-    //add error classs to input (make it red)
-    //display error message
-    //disable button
-    //if all inputs are valid
-    //enable button
-    // reest error message
+    // 1-Look for all inputs inside of form
+    // 2-Loop through all the inputs to see if all are valid
+    // 3-If input is not valid, grab the validation message
+    // 4-Add error classs to input (make it red)
+    // 5-Display error message
+    // 6-Disable button
+    // 7-If all inputs are valid
+    // 8-Enable button
+    // 9-Reset error message
   });
 }
 
@@ -134,29 +134,23 @@ enableValidation(config);
 
 function foundModalOpened(evt, modal) {
   if (evt.target.classList.contains("modal_opened")) {
+    console.log(evt.target.classList);
     closeModal(modal);
   }
 }
 
-///Step 3- Preview Card Modal Closing
+///Step 3- Preview Card Modal Closing Event Listener
 previewCardModal.addEventListener("click", function (evt) {
-  console.log("Preview card image ");
-  console.log(evt.target.classList);
-  //   if (evt.target.classList.contains("modal_opened")) {
-  //     closeModal(previewCardModal);
-  //   }
-
+  //console.log(evt.target.classList);
   foundModalOpened(evt, previewCardModal);
 });
 
-///Step 3-Profile Edit Modal Closing
-
+///Step 3-Profile Edit Modal Closing Event Listener
 profileEditModal.addEventListener("click", function (evt) {
   foundModalOpened(evt, profileEditModal);
 });
 
-///Step 3-Profile Add Modal Closing
-//console.log(profileEditModal);
+///Step 3-Profile Add Modal Closing Event Listener
 addCardModal.addEventListener("click", function (evt) {
   foundModalOpened(evt, addCardModal);
 });
@@ -167,7 +161,7 @@ addCardModal.addEventListener("click", function (evt) {
 function handleEsc(e) {
   //console.log("You are pressing a button!!");
   if (e.key === "Escape") {
-    console.log("You are pressing a the escape button!!");
+    console.log("You are pressing a the escape button!! woo hoo");
     const modal = document.querySelector(".modal_opened");
     closeModal(modal);
   }
