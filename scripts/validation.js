@@ -158,16 +158,8 @@ addCardModal.addEventListener("click", function (evt) {
 /* -------------------------------------------------------------------------- */
 /*           Step 4-Closing the popup/modal by Pressing Esc Key button        */
 /* -------------------------------------------------------------------------- */
-function handleEsc(e) {
-  //console.log("You are pressing a button!!");
-  if (e.key === "Escape") {
-    console.log("You are pressing a the escape button!! woo hoo");
-    const modal = document.querySelector(".modal_opened");
-    closeModal(modal);
-  }
-}
+
+//go in index.js
 /* -------------------------------------------------------------------------- */
 /*                               Event Listeners                              */
 /* -------------------------------------------------------------------------- */
-
-document.addEventListener("keydown", handleEsc);

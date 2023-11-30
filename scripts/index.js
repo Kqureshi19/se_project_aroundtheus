@@ -84,14 +84,23 @@ const cardURLInput = addCardFormElement.querySelector(
 /* -------------------------------------------------------------------------- */
 /*                                  Functions                                 */
 /* -------------------------------------------------------------------------- */
+function handleEsc(e) {
+  if (e.key === "Escape") {
+    const modal = document.querySelector(".modal_opened");
+    console.log(modal);
+    closeModal(modal);
+  }
+}
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener("keydown", handleEsc);
   return;
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", handleEsc);
   return;
 }
 

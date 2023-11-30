@@ -115,26 +115,30 @@
         ></button>
         <h2 class="modal__heading-card">New Place</h2>
         <form class="modal__form" name="addCard" id="add-modal-card-form">
-          <input
-            class="modal__input modal__input_type_title"
-            name="title"
-            id="add-card-form"
-            placeholder="Title"
-            type="text"
-            minlength="2"
-            maxlength="30"
-            required
-          />
-          <span class="modal__error" id="add-card-form-error"></span>
-          <input
-            class="modal__input modal__input_type_link"
-            name="link"
-            id="add-card-url-form"
-            placeholder="Image URL"
-            type="url"
-            required
-          />
-          <span class="modal__error" id="add-card-url-form-error"></span>
+          <label class="modal__label">
+            <input
+              class="modal__input modal__input_type_title"
+              name="title"
+              id="add-card-form"
+              placeholder="Title"
+              type="text"
+              minlength="2"
+              maxlength="30"
+              required
+            />
+            <span class="modal__error" id="add-card-form-error"></span>
+          </label>
+          <label class="modal__label">
+            <input
+              class="modal__input modal__input_type_link"
+              name="link"
+              id="add-card-url-form"
+              placeholder="Image URL"
+              type="url"
+              required
+            />
+            <span class="modal__error" id="add-card-url-form-error"></span>
+          </label>
           <button
             class="modal__save-button modal__save-button_disabled"
             type="submit"

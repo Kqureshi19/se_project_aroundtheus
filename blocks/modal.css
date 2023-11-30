@@ -36,6 +36,10 @@
   padding: 36px;
   border-radius: 10px;
 }
+
+.modal__label {
+  position: relative;
+}
 /* to display the close button on the image preview  */
 .modal__preview-container {
   position: relative;
@@ -91,9 +95,10 @@
   background: #fff;
   border-radius: 10px;
 }
-.modal__form [type="text"]:invalid {
+
+/*.modal__form:invalid {
   border-bottom: 1px solid #ff0000;
-}
+} */
 
 .modal__input {
   font-family: Inter, arial, sans-serif;
@@ -105,20 +110,28 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   width: 100%;
   color: #000;
-  margin-bottom: 29.74px;
+  /* margin-bottom: 8px;  */
 }
 
-.modal__input[type="text"] {
-  min-height: 60px;
+.modal__input:first-child {
+  margin-bottom: 32px;
 }
 
-.modal__input[type="url"] {
-  min-height: 60px;
+.modal__input {
+  min-height: 48px;
 }
 
-.modal__input:invalid {
+.modal__input_type_title {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+/*.modal__form [type="text"]:invalid {
   border-bottom: 1px solid #ff0000;
 }
+
+.modal__form [type="url"]:invalid {
+  border-bottom: 1px solid red;
+} */
 
 .modal__save-button {
   background-color: #000;
@@ -144,8 +157,22 @@
   max-height: 75vh;
 }
 
-.modal__error {
+.modal__error_visible {
+  position: absolute;
   color: #ff0000;
+  left: 0;
+  bottom: -2px;
+}
+.modal__form [type="text"]:valid {
+  border-bottom: 1px solid black;
+}
+
+.modal__form [type="text"]:invalid {
+  border-bottom: 1px solid #ff0000;
+}
+
+.modal__form [type="url"]:invalid {
+  border-bottom: 1px solid #ff0000;
 }
 
 @media screen and (max-width: 620px) {
