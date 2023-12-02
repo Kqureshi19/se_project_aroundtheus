@@ -50,28 +50,42 @@ function checkInputValidity(formElement, inputElement, options) {
 
   hideInputError(formElement, inputElement, options);
 }
+//check if every single input is not valid, coming from input list
+function hasInvalidInput(inputList) {
+  return !inputList.every((inputElement) => inputElement.validity.valid);
+}
+/*let foundInvalid = false;
 
-//look through all the input elements and check the validity of all of them
+  inputElements.forEach((inputElement) => {
+    if (!inputElement.validity.valid) {
+      foundInvalid = true;
+    }
+  }); */
+
+function disableButton(submitButton, inactiveButtonClass) {
+  submitButton.classList.add(inactiveButtonClass);
+  submitButton.disabled = true;
+  return;
+}
+
+function enableButton(submitButton, inactiveButtonClass) {
+  submitButton.classList.remove(inactiveButtonClass);
+  submitButton.disabled = false;
+  return;
+}
+
+//Look through all the input elements and check the validity of all of them
 //if at least 1 is invalid, turn off/disable the button
 function toggleButtonState(
   inputElements,
   submitButton,
   { inactiveButtonClass }
 ) {
-  let foundInvalid = false;
-  inputElements.forEach((inputElement) => {
-    if (!inputElement.validity.valid) {
-      foundInvalid = true;
-    }
-  });
-
-  if (foundInvalid) {
-    submitButton.classList.add(inactiveButtonClass);
-    return (submitButton.disabled = true);
+  if (hasInvalidInput(inputElements)) {
+    disableButton(submitButton, inactiveButtonClass);
+  } else {
+    enableButton(submitButton, inactiveButtonClass);
   }
-
-  submitButton.classList.remove(inactiveButtonClass);
-  submitButton.disabled = false;
 }
 
 //e.target is the same as inputElement
@@ -160,6 +174,3 @@ addCardModal.addEventListener("click", function (evt) {
 /* -------------------------------------------------------------------------- */
 
 //go in index.js
-/* -------------------------------------------------------------------------- */
-/*                               Event Listeners                              */
-/* -------------------------------------------------------------------------- */
