@@ -106,15 +106,12 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   width: 100%;
   color: #000;
+  min-height: 48px;
   /* margin-bottom: 8px;  */
 }
 
 .modal__input:first-child {
   margin-bottom: 32px;
-}
-
-.modal__input {
-  min-height: 48px;
 }
 
 .modal__input_type_title {
