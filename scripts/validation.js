@@ -94,8 +94,9 @@ function toggleButtonState(
 function setEventListeners(formElement, options) {
   const { inputSelector } = options; //these 2 lines are the same just different ways of writing it
   //const inputSelector = options.inputSelector;
+  //const submitButtonSelector = options;
   const inputElements = [...formElement.querySelectorAll(inputSelector)];
-  const submitButton = formElement.querySelector(".modal__save-button");
+  const submitButton = formElement.querySelector(options.submitButtonSelector);
   inputElements.forEach((inputElement) => {
     inputElement.addEventListener("input", (e) => {
       //console.dir(inputElement);
@@ -145,29 +146,6 @@ enableValidation(config);
 /* -------------------------------------------------------------------------- */
 /*                Step 3-Closing the Popup  By Clicking on the Overlay        */
 /* -------------------------------------------------------------------------- */
-
-function foundModalOpened(evt, modal) {
-  if (evt.target.classList.contains("modal_opened")) {
-    console.log(evt.target.classList);
-    closeModal(modal);
-  }
-}
-
-///Step 3- Preview Card Modal Closing Event Listener
-previewCardModal.addEventListener("click", function (evt) {
-  //console.log(evt.target.classList);
-  foundModalOpened(evt, previewCardModal);
-});
-
-///Step 3-Profile Edit Modal Closing Event Listener
-profileEditModal.addEventListener("click", function (evt) {
-  foundModalOpened(evt, profileEditModal);
-});
-
-///Step 3-Profile Add Modal Closing Event Listener
-addCardModal.addEventListener("click", function (evt) {
-  foundModalOpened(evt, addCardModal);
-});
 
 /* -------------------------------------------------------------------------- */
 /*           Step 4-Closing the popup/modal by Pressing Esc Key button        */
