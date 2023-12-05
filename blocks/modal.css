@@ -33,8 +33,10 @@
 .modal__container {
   position: relative;
   background-color: #fff;
-  padding: 36px;
+  padding: 22px;
   border-radius: 10px;
+  max-width: 282px;
+  box-sizing: border-box;
 }
 
 .modal__label {

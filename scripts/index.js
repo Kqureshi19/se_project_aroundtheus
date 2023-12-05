@@ -225,7 +225,7 @@ function handleAddCardFormSubmit(e) {
   closeModal(addCardModal);
 
   const form = document.forms.addCard;
-  form.reset();
+  form?.reset();
   return;
 }
 
