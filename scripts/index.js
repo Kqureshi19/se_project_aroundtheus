@@ -224,8 +224,10 @@ function handleAddCardFormSubmit(e) {
   renderCard({ name, link }, cardsWrap);
   closeModal(addCardModal);
 
-  const form = document.forms.addCard;
-  form?.reset();
+  //const form = document.forms.addCardModal;
+  //console.log(addCardFormElement);
+  addCardFormElement.reset();
+
   return;
 }
 
