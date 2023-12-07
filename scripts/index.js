@@ -1,3 +1,6 @@
+import Card from "./Card.js";
+//import FormValidator from "./FormValidator.js";
+
 const initialCards = [
   {
     name: "Lake Louise",
@@ -31,6 +34,15 @@ const initialCards = [
 ];
 
 //console.log(typeof initialCards);
+const cardData = {
+  name: "Lake Louise",
+  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
+};
+//Instantiate or make a copy of the Card Class:
+const card = new Card(cardData, "#card-template");
+card.getView();
+//We are grabbing the template
+//const cardSelector = "#card-tmplate";
 
 /* -------------------------------------------------------------------------- */
 /*                                Card Template                               */
@@ -136,25 +148,30 @@ function fillProfileForm() {
 }
 
 function renderCard(cardData, wrapper) {
-  const cardElement = getCardElement(cardData);
+  const cardElement = new Card(
+    cardData,
+    "#card-template",
+    previewCardImage
+  ).getView();
   wrapper.prepend(cardElement);
-  return;
 }
 
 //1-find delete button
 //2-add event listener to the delete button
 //3-to remove card-call method on html element (cardElement.remove()
 function pressDeleteButton(cardElement) {
-  const deleteCardElement = cardElement.querySelector(".card__trash-button");
-  deleteCardElement.addEventListener("click", () => {
-    cardElement.remove("card");
-    return;
-  });
+  // const deleteCardElement = cardElement.querySelector(".card__trash-button");
+  // deleteCardElement.addEventListener("click", () => {
+  //   //cardElement.remove("card");
+  //   console.log("Its been removed!");
+  //   return;
+  // });
 }
 function toggleLikeButton(cardElement) {
   const likeButton = cardElement.querySelector(".card__like-button");
   likeButton.addEventListener("click", () => {
     likeButton.classList.toggle("card__like-button_active");
+    console.log("Press Like Button");
     return;
   });
 }
@@ -224,10 +241,8 @@ function handleAddCardFormSubmit(e) {
   renderCard({ name, link }, cardsWrap);
   closeModal(addCardModal);
 
-  //const form = document.forms.addCardModal;
   //console.log(addCardFormElement);
   addCardFormElement.reset();
-
   return;
 }
 
