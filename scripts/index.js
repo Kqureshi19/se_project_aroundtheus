@@ -1,5 +1,6 @@
-import Card from "./Card.js";
-//import FormValidator from "./FormValidator.js";
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
+//import { config } from "./validation.js";
 
 const initialCards = [
   {
@@ -38,12 +39,40 @@ const cardData = {
   name: "Lake Louise",
   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
 };
-//Instantiate or make a copy of the Card Class:
+
+/* -------------------------------------------------------------------------- */
+/*                                 Card-Card Class                            */
+/* -------------------------------------------------------------------------- */
+//Instantiate or make a copy of the Card Class and pass cardData and the template to it
+//Then call getView() method from the class
 const card = new Card(cardData, "#card-template");
 card.getView();
 //We are grabbing the template
 //const cardSelector = "#card-tmplate";
 
+/* -------------------------------------------------------------------------- */
+/*                           Validation-Form Validator Class                  */
+/* -------------------------------------------------------------------------- */
+
+const validationSettings = {
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__save-button",
+  inactiveButtonClass: "modal__save-button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
+
+//these exist already
+//const profileEditForm = document.forms["profile-edit-form"];
+//const addCardFormElement = document.forms["add-card-form"];
+/*const editFormValidator = new FormValidator(
+  validationSettings,
+  profileEditForm
+) 
+const addFormValidator = new FormValidator(
+  validationSettings,
+  addCardFormElement
+); */
 /* -------------------------------------------------------------------------- */
 /*                                Card Template                               */
 /* -------------------------------------------------------------------------- */
@@ -94,6 +123,30 @@ const cardTitleInput = addCardFormElement.querySelector(
 const cardURLInput = addCardFormElement.querySelector(
   ".modal__input_type_link"
 );
+
+const config = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__save-button",
+  inactiveButtonClass: "modal__save-button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
+
+/* -------------------------------------------------------------------------- */
+/*                                  Validation                                */
+/* -------------------------------------------------------------------------- */
+//For both of the forms, we are creating 2 different validators
+//we are creating 2 instances of Form Validators
+//1-const profileEditForm = document.forms["profile-edit-form"]; already grabbed the constant
+/*const editFormValidator = new FormValidator(
+  validationSettings,
+  profileEditForm
+);
+editFormValidator.enableValidation(); */
+//const addCardFormElement = document.forms["add-card-form"];
+const addFormValidator = new FormValidator(config, addCardFormElement);
+//addFormValidator.enableValidation();
 
 /* -------------------------------------------------------------------------- */
 /*                                  Functions                                 */
@@ -146,12 +199,13 @@ function fillProfileForm() {
   profileDescriptionInput.value = profileDescription.textContent;
   return;
 }
-
+//This is where we instantiate the card class
+//cardData is {name, link}, i.e. grab the specific data and pass it to getView()
 function renderCard(cardData, wrapper) {
   const cardElement = new Card(
     cardData,
     "#card-template",
-    previewCardImage
+    handleImageClick
   ).getView();
   wrapper.prepend(cardElement);
 }
@@ -168,12 +222,12 @@ function pressDeleteButton(cardElement) {
   // });
 }
 function toggleLikeButton(cardElement) {
-  const likeButton = cardElement.querySelector(".card__like-button");
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("card__like-button_active");
-    console.log("Press Like Button");
-    return;
-  });
+  //const likeButton = cardElement.querySelector(".card__like-button");
+  //likeButton.addEventListener("click", () => {
+  //  likeButton.classList.toggle("card__like-button_active");
+  //  console.log("Press Like Button");
+  //  return;
+  //});
 }
 
 /*Opening the Picture Modal Steps:
@@ -181,16 +235,17 @@ function toggleLikeButton(cardElement) {
  2-set the src of popup image element
  3-set the alt of popup image element
  4-set the text of popup caption element*/
-
-function previewCardImage(cardImageElement, cardTitleElement) {
-  cardImageElement.addEventListener("click", () => {
-    const modalCaption = document.querySelector(".modal__caption");
-    openModal(previewCardModal);
-    modalPreviewImageElement.src = cardImageElement.src;
-    modalPreviewImageElement.alt = cardImageElement.alt;
-    modalCaption.textContent = cardTitleElement.textContent;
-    return;
-  });
+//previewCardImage is changed to handleImageClick
+function handleImageClick(cardImageElement, cardTitleElement) {
+  console.log(cardImageElement);
+  //cardImageElement.addEventListener("click", () => {
+  const modalCaption = document.querySelector(".modal__caption");
+  openModal(previewCardModal);
+  modalPreviewImageElement.src = cardImageElement.src;
+  modalPreviewImageElement.alt = cardImageElement.alt;
+  modalCaption.textContent = cardTitleElement.textContent;
+  return;
+  //});
 }
 
 /*
@@ -207,19 +262,16 @@ i.e. you have to append it
 // finding the like button for the card we are currently generating
 //when we return cardelement, its already setup for a like/delete/previewcard button that is listening for a click
 function getCardElement(cardData) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImageElement = cardElement.querySelector(".card__image");
-  const cardTitleElement = cardElement.querySelector(".card__title");
-
-  pressDeleteButton(cardElement);
-  previewCardImage(cardImageElement, cardTitleElement);
-  toggleLikeButton(cardElement);
-
-  cardImageElement.src = cardData.link;
-  cardImageElement.alt = cardData.name;
-  cardTitleElement.textContent = cardData.name;
-
-  return cardElement;
+  //const cardElement = cardTemplate.cloneNode(true);
+  //const cardImageElement = cardElement.querySelector(".card__image");
+  //const cardTitleElement = cardElement.querySelector(".card__title");
+  //pressDeleteButton(cardElement);
+  //previewCardImage(cardImageElement, cardTitleElement);
+  //toggleLikeButton(cardElement);
+  //cardImageElement.src = cardData.link;
+  //cardImageElement.alt = cardData.name;
+  //cardTitleElement.textContent = cardData.name;
+  //return cardElement;
 }
 
 /* -------------------------------------------------------------------------- */

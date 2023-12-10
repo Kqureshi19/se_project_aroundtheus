@@ -2,12 +2,18 @@ export default class Card {
   constructor({ name, link }, cardSelector, handleImageClick) {
     this._name = name;
     this._link = link;
-    this._cardSelector = cardSelector;
+    this._cardSelector = cardSelector; //this is the template of the card, i.e cardSeelctor = #card-template
     this._handleImageClick = handleImageClick;
+    console.log(handleImageClick);
   }
 
+  //Set the even listeners for the following (3):
+  //1. Like Button
+  //2. Delete Button
+  //3. Preview Image
   _setEventListeners() {
     //".card__like-button" this._handleLikeIcon()
+    //1-Handle the Like Button
     console.log("Event Listener: Listening!");
     this._cardElement
       .querySelector(".card__like-button")
@@ -16,27 +22,57 @@ export default class Card {
       });
     //console.log(likeButton);
     //".card__trash-button"
+    //2-Handle the Delete Button
     this._cardElement
       .querySelector(".card__trash-button")
       .addEventListener("click", () => {
         this._handleDeleteCard();
       });
-    console.log(this._cardElement.querySelector(".card__like-button"));
+    this._cardImageElement = this._cardElement.querySelector(".card__image");
+    this._cardTitleElement = this._cardElement.querySelector(".card__title");
+    //3-Handle the Click Image Button i.e. Preview Card Click
+    this._cardElement
+      .querySelector(".card__image")
+      .addEventListener("click", () => {
+        this._handleImageClick(this._cardImageElement, this._cardTitleElement);
+        //this._handleImageClick(
+        //  this_handleCardClickParameter1(),
+        //  this_handleCardClickParameter2()
+        //);
+        console.log("Modal Caption");
+      });
+
+    console.log(this._handleImageClick);
   }
 
   //fyi, cardelement is the current card we are working with
   _handleLikeIcon() {
+    console.log("Pressing Like Button from  card class");
     this._cardElement
-      .querySelector("card__like-button")
+      .querySelector(".card__like-button")
       .classList.toggle("card__like-button_active");
+    //this._cardElement.classList.toggle("card__like-button_active");
   }
 
   _handleDeleteCard() {
     this._cardElement.remove();
-    console.log("Testing3");
+    this._cardElement = null;
+    console.log("removing card!");
+  }
+
+  _handleCardClickParameter1() {
+    this._cardImageElement = this._cardElement.querySelector(".card__image");
+    return this._cardImageElement;
+  }
+
+  _handleCardClickParameter2() {
+    this._cardTitleElement = this._cardElement.querySelector(".card__title");
+    return this._carTitleElement;
   }
 
   //this is a public method--since you can access it outside its class
+  //this is the entrance point to your card, which will be used/called in index.js
+  //we grab the templater first
   getView() {
     this._cardElement = document
       .querySelector(this._cardSelector)
@@ -49,7 +85,7 @@ export default class Card {
     this._cardImage.alt = this._name;
     console.log("right here");
     console.log(this._cardTitle);
-    this._cardTitle.textcontent = this._name;
+    this._cardTitle.textContent = this._name;
 
     //console.log(cardElement);
     this._setEventListeners();
@@ -60,6 +96,3 @@ export default class Card {
     return this._cardElement;
   }
 }
-
-console.log("testing1");
-console.log("testing2");

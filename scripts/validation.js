@@ -132,7 +132,7 @@ function enableValidation(options) {
   });
 }
 
-const config = {
+export const config = {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",
   submitButtonSelector: ".modal__save-button",
