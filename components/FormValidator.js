@@ -12,7 +12,7 @@ class FormValidator {
     );
 
     //this will log the Class itself***
-    console.log(settings);
+    console.log("settings", settings);
   }
   //this will basically toggle the error-refactored**
   //formElement becomes this._form
@@ -85,7 +85,7 @@ class FormValidator {
     //this._submitButton = this._form.querySelector(this._submitButtonSelector);
 
     this._inputElements.forEach((inputElement) => {
-      inputElement.addEventListener("input", (e) => {
+      inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
         this._toggleButtonState(); //can remove the paramters and add this since you are calling it within the class
       });

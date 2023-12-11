@@ -28,17 +28,17 @@ export default class Card {
       .addEventListener("click", () => {
         this._handleDeleteCard();
       });
-    this._cardImageElement = this._cardElement.querySelector(".card__image");
-    this._cardTitleElement = this._cardElement.querySelector(".card__title");
+    // this._cardImageElement = this._cardElement.querySelector(".card__image");
+    // this._cardTitleElement = this._cardElement.querySelector(".card__title");
     //3-Handle the Click Image Button i.e. Preview Card Click
     this._cardElement
       .querySelector(".card__image")
       .addEventListener("click", () => {
-        this._handleImageClick(this._cardImageElement, this._cardTitleElement);
-        /*this._handleImageClick(
+        // this._handleImageClick(this._cardImageElement, this._cardTitleElement);
+        this._handleImageClick(
           this._handleCardClickParameter1(),
           this._handleCardClickParameter2()
-        ); */
+        );
         console.log("Modal Caption");
       });
 
@@ -67,7 +67,8 @@ export default class Card {
 
   _handleCardClickParameter2() {
     this._cardTitleElement = this._cardElement.querySelector(".card__title");
-    return this._carTitleElement;
+    debugger;
+    return this._cardTitleElement;
   }
 
   //this is a public method--since you can access it outside its class
