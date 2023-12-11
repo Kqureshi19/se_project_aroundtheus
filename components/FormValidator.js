@@ -2,16 +2,17 @@ class FormValidator {
   //create constructor and copy everything from validate.js except formSelector since formElement is used instead
   constructor(settings, formElement) {
     this._inputSelector = settings.inputSelector;
-    this._submitButton = formElement.querySelector(
-      settings._submitButtonSelector
-    );
-    this._inactiveButtonClass = settings._inactiveButtonClass;
+    this._inactiveButtonClass = settings.inactiveButtonClass;
     this._inputErrorClass = settings.inputErrorClass;
     this._errorClass = settings.errorClass;
 
     this._form = formElement;
+    this._submitButton = formElement.querySelector(
+      settings.submitButtonSelector
+    );
+
     //this will log the Class itself***
-    console.log(this);
+    console.log(settings);
   }
   //this will basically toggle the error-refactored**
   //formElement becomes this._form
@@ -45,8 +46,9 @@ class FormValidator {
   }
 
   //removed paramters that were declared within this class already
-  // does disable button and enable button need a this?
+  //inputElements is removed from the parameters b.c its declared even though its not in the contructor
   _toggleButtonState() {
+    console.log("testing1211", this._submitButton);
     if (this._hasInvalidInput(this._inputElements)) {
       this._disableButton();
     } else {
@@ -80,7 +82,7 @@ class FormValidator {
     this._inputElements = Array.from(
       this._form.querySelectorAll(this._inputSelector)
     );
-    this._submitButton = this._form.querySelector(this._submitButtonSelector);
+    //this._submitButton = this._form.querySelector(this._submitButtonSelector);
 
     this._inputElements.forEach((inputElement) => {
       inputElement.addEventListener("input", (e) => {
@@ -94,7 +96,7 @@ class FormValidator {
   //public method that activates the validation of the generated form
   //plays the role of init method (its public)
   //Will be called by the 2 form methods on index.js
-  //also removing the loops since that is handled in index.js, once per form
+  //also removing the loops since that is handled in index.js, once per unique form
   enableValidation() {
     this._form.addEventListener("submit", (e) => {
       e.preventDefault();

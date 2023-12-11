@@ -54,14 +54,6 @@ card.getView();
 /*                           Validation-Form Validator Class                  */
 /* -------------------------------------------------------------------------- */
 
-const validationSettings = {
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__save-button",
-  inactiveButtonClass: "modal__save-button_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error_visible",
-};
-
 //these exist already
 //const profileEditForm = document.forms["profile-edit-form"];
 //const addCardFormElement = document.forms["add-card-form"];
@@ -124,7 +116,7 @@ const cardURLInput = addCardFormElement.querySelector(
   ".modal__input_type_link"
 );
 
-const config = {
+const settings = {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",
   submitButtonSelector: ".modal__save-button",
@@ -139,14 +131,11 @@ const config = {
 //For both of the forms, we are creating 2 different validators
 //we are creating 2 instances of Form Validators
 //1-const profileEditForm = document.forms["profile-edit-form"]; already grabbed the constant
-/*const editFormValidator = new FormValidator(
-  validationSettings,
-  profileEditForm
-);
-editFormValidator.enableValidation(); */
+const editFormValidator = new FormValidator(settings, profileEditForm);
+editFormValidator.enableValidation();
 //const addCardFormElement = document.forms["add-card-form"];
-const addFormValidator = new FormValidator(config, addCardFormElement);
-//addFormValidator.enableValidation();
+const addFormValidator = new FormValidator(settings, addCardFormElement);
+addFormValidator.enableValidation();
 
 /* -------------------------------------------------------------------------- */
 /*                                  Functions                                 */

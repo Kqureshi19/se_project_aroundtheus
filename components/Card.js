@@ -35,10 +35,10 @@ export default class Card {
       .querySelector(".card__image")
       .addEventListener("click", () => {
         this._handleImageClick(this._cardImageElement, this._cardTitleElement);
-        //this._handleImageClick(
-        //  this_handleCardClickParameter1(),
-        //  this_handleCardClickParameter2()
-        //);
+        /*this._handleImageClick(
+          this._handleCardClickParameter1(),
+          this._handleCardClickParameter2()
+        ); */
         console.log("Modal Caption");
       });
 
