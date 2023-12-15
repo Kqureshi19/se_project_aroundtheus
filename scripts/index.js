@@ -44,7 +44,7 @@ const cardData = {
 /*                                 Card-Card Class                            */
 /* -------------------------------------------------------------------------- */
 //Instantiate or make a copy of the Card Class and pass cardData and the template to it
-//Then call getView() method from the class
+//Then call getView() method from the class-#card-template
 const card = new Card(cardData, "#card-template");
 card.getView();
 //We are grabbing the template

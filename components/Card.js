@@ -1,13 +1,15 @@
+//Class Card will have 3 parameters, 1. data 2. cardSelector 3. handleImageClick
+//getview() is the entry point, it is the only public method in this class
 export default class Card {
   constructor({ name, link }, cardSelector, handleImageClick) {
     this._name = name;
     this._link = link;
-    this._cardSelector = cardSelector; //this is the template of the card, i.e cardSeelctor = #card-template
+    this._cardSelector = cardSelector; //this is the template of the card, i.e cardSelector = #card-template
     this._handleImageClick = handleImageClick;
-    console.log(handleImageClick);
+    //console.log(handleImageClick);
   }
 
-  //Set the even listeners for the following (3):
+  //Set the Event Listeners for the following (3):
   //1. Like Button
   //2. Delete Button
   //3. Preview Image
@@ -36,18 +38,17 @@ export default class Card {
       .addEventListener("click", () => {
         // this._handleImageClick(this._cardImageElement, this._cardTitleElement);
         this._handleImageClick(
-          this._handleCardClickParameter1(),
-          this._handleCardClickParameter2()
+          this._handleCardClickParameterCardImage(),
+          this._handleCardClickParameterCardTitle()
         );
-        console.log("Modal Caption");
       });
 
-    console.log(this._handleImageClick);
+    //console.log(this._handleImageClick);
   }
 
   //fyi, cardelement is the current card we are working with
   _handleLikeIcon() {
-    console.log("Pressing Like Button from  card class");
+    //console.log("Pressing Like Button from  card class");
     this._cardElement
       .querySelector(".card__like-button")
       .classList.toggle("card__like-button_active");
@@ -59,21 +60,22 @@ export default class Card {
     this._cardElement = null;
     console.log("removing card!");
   }
-
-  _handleCardClickParameter1() {
+  ///Parameters #1 for handleImageClick Method///
+  _handleCardClickParameterCardImage() {
     this._cardImageElement = this._cardElement.querySelector(".card__image");
     return this._cardImageElement;
   }
-
-  _handleCardClickParameter2() {
+  ///Parameters #2 for handleImageClick Method///
+  _handleCardClickParameterCardTitle() {
     this._cardTitleElement = this._cardElement.querySelector(".card__title");
-    debugger;
+    //debugger;
     return this._cardTitleElement;
   }
 
-  //this is a public method--since you can access it outside its class
+  //Public Method-since you can access it outside its class
   //this is the entrance point to your card, which will be used/called in index.js
-  //we grab the templater first
+  //1.Grab the template first and clone it
+  //2. Add data to the template clone & call setEventListersn() method and return new card
   getView() {
     this._cardElement = document
       .querySelector(this._cardSelector)
@@ -89,6 +91,7 @@ export default class Card {
     this._cardTitle.textContent = this._name;
 
     //console.log(cardElement);
+    //This will add all the event listeners when the card is created
     this._setEventListeners();
     //1-get the card view
     //2-set event listeners-we are invoking a method, so we are using this

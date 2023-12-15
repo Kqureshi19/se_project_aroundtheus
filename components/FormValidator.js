@@ -12,7 +12,7 @@ class FormValidator {
     );
 
     //this will log the Class itself***
-    console.log("settings", settings);
+    //console.log("settings", settings);
   }
   //this will basically toggle the error-refactored**
   //formElement becomes this._form
