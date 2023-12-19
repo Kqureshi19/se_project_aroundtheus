@@ -6,7 +6,6 @@ export default class Card {
     this._link = link;
     this._cardSelector = cardSelector; //this is the template of the card, i.e cardSelector = #card-template
     this._handleImageClick = handleImageClick;
-    //console.log(handleImageClick);
   }
 
   //Set the Event Listeners for the following (3):
@@ -16,14 +15,12 @@ export default class Card {
   _setEventListeners() {
     //".card__like-button" this._handleLikeIcon()
     //1-Handle the Like Button
-    console.log("Event Listener: Listening!");
     this._cardElement
       .querySelector(".card__like-button")
       .addEventListener("click", () => {
         this._handleLikeIcon();
       });
-    //console.log(likeButton);
-    //".card__trash-button"
+
     //2-Handle the Delete Button
     this._cardElement
       .querySelector(".card__trash-button")
@@ -36,14 +33,11 @@ export default class Card {
     this._cardElement
       .querySelector(".card__image")
       .addEventListener("click", () => {
-        // this._handleImageClick(this._cardImageElement, this._cardTitleElement);
         this._handleImageClick(
           this._handleCardClickParameterCardImage(),
           this._handleCardClickParameterCardTitle()
         );
       });
-
-    //console.log(this._handleImageClick);
   }
 
   //fyi, cardelement is the current card we are working with
@@ -58,16 +52,17 @@ export default class Card {
   _handleDeleteCard() {
     this._cardElement.remove();
     this._cardElement = null;
-    console.log("removing card!");
   }
   ///Parameters #1 for handleImageClick Method///
   _handleCardClickParameterCardImage() {
-    this._cardImageElement = this._cardElement.querySelector(".card__image");
+    this._cardImageElement = this._cardImage;
+    //this._cardImageElement = this._cardElement.querySelector(".card__image");
     return this._cardImageElement;
   }
   ///Parameters #2 for handleImageClick Method///
   _handleCardClickParameterCardTitle() {
-    this._cardTitleElement = this._cardElement.querySelector(".card__title");
+    this._cardTitleElement = this._cardTitle;
+    //this._cardTitleElement = this._cardElement.querySelector(".card__title");
     //debugger;
     return this._cardTitleElement;
   }

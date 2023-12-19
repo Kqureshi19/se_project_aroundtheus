@@ -45,8 +45,8 @@ const cardData = {
 /* -------------------------------------------------------------------------- */
 //Instantiate or make a copy of the Card Class and pass cardData and the template to it
 //Then call getView() method from the class-#card-template
-const card = new Card(cardData, "#card-template");
-card.getView();
+//const card = new Card(cardData, "#card-template");
+//card.getView();
 //We are grabbing the template
 //const cardSelector = "#card-tmplate";
 
@@ -160,7 +160,7 @@ function closeModal(modal) {
   return;
 }
 
-function foundModalOpened(evt, modal) {
+function handleOverlay(evt, modal) {
   if (evt.target.classList.contains("modal_opened")) {
     console.log(evt.target.classList);
     closeModal(modal);
@@ -170,17 +170,17 @@ function foundModalOpened(evt, modal) {
 ///Step 3- Preview Card Modal Closing Event Listener
 previewCardModal.addEventListener("click", function (evt) {
   //console.log(evt.target.classList);
-  foundModalOpened(evt, previewCardModal);
+  handleOverlay(evt, previewCardModal);
 });
 
 ///Step 3-Profile Edit Modal Closing Event Listener
 profileEditModal.addEventListener("click", function (evt) {
-  foundModalOpened(evt, profileEditModal);
+  handleOverlay(evt, profileEditModal);
 });
 
 ///Step 3-Profile Add Modal Closing Event Listener
 addCardModal.addEventListener("click", function (evt) {
-  foundModalOpened(evt, addCardModal);
+  handleOverlay(evt, addCardModal);
 });
 
 function fillProfileForm() {
@@ -190,34 +190,44 @@ function fillProfileForm() {
 }
 //This is where we instantiate the card class
 //cardData is {name, link}, i.e. grab the specific data and pass it to getView()
-function renderCard(cardData, wrapper) {
+/*function renderCard(cardData, wrapper) {
   const cardElement = new Card(
     cardData,
     "#card-template",
     handleImageClick
   ).getView();
   wrapper.prepend(cardElement);
+} */
+
+function createCard(cardData) {
+  const cardElement = new Card(cardData, "#card-template", handleImageClick);
+  return cardElement.getView();
+}
+
+function renderCard(cardData, wrapper) {
+  const cardElement = createCard(cardData);
+  wrapper.prepend(cardElement);
 }
 
 //1-find delete button
 //2-add event listener to the delete button
 //3-to remove card-call method on html element (cardElement.remove()
-function pressDeleteButton(cardElement) {
-  // const deleteCardElement = cardElement.querySelector(".card__trash-button");
-  // deleteCardElement.addEventListener("click", () => {
-  //   //cardElement.remove("card");
-  //   console.log("Its been removed!");
-  //   return;
-  // });
-}
-function toggleLikeButton(cardElement) {
-  //const likeButton = cardElement.querySelector(".card__like-button");
-  //likeButton.addEventListener("click", () => {
-  //  likeButton.classList.toggle("card__like-button_active");
-  //  console.log("Press Like Button");
-  //  return;
-  //});
-}
+//function pressDeleteButton(cardElement) {
+// const deleteCardElement = cardElement.querySelector(".card__trash-button");
+// deleteCardElement.addEventListener("click", () => {
+//   //cardElement.remove("card");
+//   console.log("Its been removed!");
+//   return;
+// });
+//}
+//function toggleLikeButton(cardElement) {
+//const likeButton = cardElement.querySelector(".card__like-button");
+//likeButton.addEventListener("click", () => {
+//  likeButton.classList.toggle("card__like-button_active");
+//  console.log("Press Like Button");
+//  return;
+//});
+//}
 
 /*Opening the Picture Modal Steps:
  1-call your openModal function, passing it the modal as an argument
@@ -250,18 +260,18 @@ i.e. you have to append it
 
 // finding the like button for the card we are currently generating
 //when we return cardelement, its already setup for a like/delete/previewcard button that is listening for a click
-function getCardElement(cardData) {
-  //const cardElement = cardTemplate.cloneNode(true);
-  //const cardImageElement = cardElement.querySelector(".card__image");
-  //const cardTitleElement = cardElement.querySelector(".card__title");
-  //pressDeleteButton(cardElement);
-  //previewCardImage(cardImageElement, cardTitleElement);
-  //toggleLikeButton(cardElement);
-  //cardImageElement.src = cardData.link;
-  //cardImageElement.alt = cardData.name;
-  //cardTitleElement.textContent = cardData.name;
-  //return cardElement;
-}
+//function getCardElement(cardData) {
+//const cardElement = cardTemplate.cloneNode(true);
+//const cardImageElement = cardElement.querySelector(".card__image");
+//const cardTitleElement = cardElement.querySelector(".card__title");
+//pressDeleteButton(cardElement);
+//previewCardImage(cardImageElement, cardTitleElement);
+//toggleLikeButton(cardElement);
+//cardImageElement.src = cardData.link;
+//cardImageElement.alt = cardData.name;
+//cardTitleElement.textContent = cardData.name;
+//return cardElement;
+//}
 
 /* -------------------------------------------------------------------------- */
 /*                               Event Handlers                               */
@@ -284,7 +294,9 @@ function handleAddCardFormSubmit(e) {
 
   //console.log(addCardFormElement);
   addCardFormElement.reset();
-  return;
+  addCardFormElement
+    .querySelector(settings.submitButtonSelector)
+    .classList.add(settings.inactiveButtonClass);
 }
 
 /* -------------------------------------------------------------------------- */
