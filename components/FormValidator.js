@@ -13,10 +13,12 @@ class FormValidator {
 
     //this will log the Class itself***
     //console.log("settings", settings);
+    //console.log("testthis", this._inputElements);
   }
   //this will basically toggle the error-refactored**
   //formElement becomes this._form
   //**If its on the constructor in the methods, add the 'this' keyword */
+
   _showInputError(inputElement) {
     const errorMessageElement = this._form.querySelector(
       `#${inputElement.id}-error`
@@ -49,8 +51,13 @@ class FormValidator {
     // if you update this._inputElements, you might change the _toggleButtonState scenario
     // tip: you need to run this func when you open OR close modal
     //console.log("toggleButtonDStatePublicMethod Testing");
-    const addCardFormElement = document.forms["add-card-form"];
-    addCardFormElement.reset();
+    //const addCardFormElement = document.forms["add-card-form"];
+    //this._addCardFormElement = document.forms["add-card-form"];
+    //this._addCardFormElement.reset();
+    //this._inputSelector.textContent.reset();
+    //this._inputElements.reset(;)
+    //this.inputElement.reset();
+    this._form.reset();
     this._toggleButtonState();
   }
 
