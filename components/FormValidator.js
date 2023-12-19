@@ -45,10 +45,19 @@ class FormValidator {
     return;
   }
 
+  toggleButtonStatePublicMethod() {
+    // if you update this._inputElements, you might change the _toggleButtonState scenario
+    // tip: you need to run this func when you open OR close modal
+    //console.log("toggleButtonDStatePublicMethod Testing");
+    const addCardFormElement = document.forms["add-card-form"];
+    addCardFormElement.reset();
+    this._toggleButtonState();
+  }
+
   //removed paramters that were declared within this class already
   //inputElements is removed from the parameters b.c its declared even though its not in the contructor
   _toggleButtonState() {
-    console.log("testing1211", this._submitButton);
+    //console.log("testing1211", this._submitButton);
     if (this._hasInvalidInput(this._inputElements)) {
       this._disableButton();
     } else {

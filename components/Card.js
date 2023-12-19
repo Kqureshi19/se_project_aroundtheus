@@ -30,14 +30,9 @@ export default class Card {
     // this._cardImageElement = this._cardElement.querySelector(".card__image");
     // this._cardTitleElement = this._cardElement.querySelector(".card__title");
     //3-Handle the Click Image Button i.e. Preview Card Click
-    this._cardElement
-      .querySelector(".card__image")
-      .addEventListener("click", () => {
-        this._handleImageClick(
-          this._handleCardClickParameterCardImage(),
-          this._handleCardClickParameterCardTitle()
-        );
-      });
+    this._cardImage.addEventListener("click", () => {
+      this._handleImageClick(this._cardImage, this._cardTitle);
+    });
   }
 
   //fyi, cardelement is the current card we are working with
@@ -52,19 +47,6 @@ export default class Card {
   _handleDeleteCard() {
     this._cardElement.remove();
     this._cardElement = null;
-  }
-  ///Parameters #1 for handleImageClick Method///
-  _handleCardClickParameterCardImage() {
-    this._cardImageElement = this._cardImage;
-    //this._cardImageElement = this._cardElement.querySelector(".card__image");
-    return this._cardImageElement;
-  }
-  ///Parameters #2 for handleImageClick Method///
-  _handleCardClickParameterCardTitle() {
-    this._cardTitleElement = this._cardTitle;
-    //this._cardTitleElement = this._cardElement.querySelector(".card__title");
-    //debugger;
-    return this._cardTitleElement;
   }
 
   //Public Method-since you can access it outside its class

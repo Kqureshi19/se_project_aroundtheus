@@ -292,11 +292,7 @@ function handleAddCardFormSubmit(e) {
   renderCard({ name, link }, cardsWrap);
   closeModal(addCardModal);
 
-  //console.log(addCardFormElement);
-  addCardFormElement.reset();
-  addCardFormElement
-    .querySelector(settings.submitButtonSelector)
-    .classList.add(settings.inactiveButtonClass);
+  addFormValidator.toggleButtonStatePublicMethod();
 }
 
 /* -------------------------------------------------------------------------- */
