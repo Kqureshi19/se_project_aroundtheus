@@ -14,6 +14,7 @@ class FormValidator {
     //this will log the Class itself***
     //console.log("settings", settings);
     //console.log("testthis", this._inputElements);
+    console.log("formElement is: ", this._form);
   }
   //this will basically toggle the error-refactored**
   //formElement becomes this._form
@@ -47,7 +48,7 @@ class FormValidator {
     return;
   }
 
-  toggleButtonStatePublicMethod() {
+  resetForm() {
     // if you update this._inputElements, you might change the _toggleButtonState scenario
     // tip: you need to run this func when you open OR close modal
     //console.log("toggleButtonDStatePublicMethod Testing");
@@ -58,7 +59,7 @@ class FormValidator {
     //this._inputElements.reset(;)
     //this.inputElement.reset();
     this._form.reset();
-    this._toggleButtonState();
+    this._disableButton();
   }
 
   //removed paramters that were declared within this class already

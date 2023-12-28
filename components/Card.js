@@ -31,7 +31,7 @@ export default class Card {
     // this._cardTitleElement = this._cardElement.querySelector(".card__title");
     //3-Handle the Click Image Button i.e. Preview Card Click
     this._cardImage.addEventListener("click", () => {
-      this._handleImageClick(this._cardImage, this._cardTitle);
+      this._handleImageClick({ name: this._name, link: this._link });
     });
   }
 
@@ -51,7 +51,7 @@ export default class Card {
 
   //Public Method-since you can access it outside its class
   //this is the entrance point to your card, which will be used/called in index.js
-  //1.Grab the template first and clone it
+  //1.Grab the template first and clone it (i.e cardSelector = #card-template)
   //2. Add data to the template clone & call setEventListersn() method and return new card
   getView() {
     this._cardElement = document
@@ -64,7 +64,7 @@ export default class Card {
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     console.log("right here");
-    console.log(this._cardTitle);
+    console.log("cardSelector: ", this._cardSelector);
     this._cardTitle.textContent = this._name;
 
     //console.log(cardElement);

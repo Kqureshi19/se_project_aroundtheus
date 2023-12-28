@@ -1,6 +1,12 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
+import PopupWithForm from "../components/PopupWithForm.js";
 //import { config } from "./validation.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import Section from "../components/Section.js";
+
+//Create instances of the classes
+//const CardPreview = new PopupWithImage(selectors.previewCardModal);
 
 const initialCards = [
   {
@@ -162,6 +168,7 @@ function closeModal(modal) {
 
 function handleOverlay(evt, modal) {
   if (evt.target.classList.contains("modal_opened")) {
+    console.log("testing 1225");
     console.log(evt.target.classList);
     closeModal(modal);
   }
@@ -228,6 +235,18 @@ function renderCard(cardData, wrapper) {
 //  return;
 //});
 //}
+/* ---------------------- PopupWithForm Initialization ---------------------- */
+const newCardModal = new PopupWithForm(
+  "#add-card-modal",
+  handleAddCardFormSubmit
+);
+newCardModal.setEventListeners();
+
+const editProfileModal = new PopupWithForm(
+  "#profile-edit-modal",
+  handleProfileEditSubmit
+);
+editProfileModal.setEventListeners();
 
 /*Opening the Picture Modal Steps:
  1-call your openModal function, passing it the modal as an argument
@@ -235,16 +254,20 @@ function renderCard(cardData, wrapper) {
  3-set the alt of popup image element
  4-set the text of popup caption element*/
 //previewCardImage is changed to handleImageClick
-function handleImageClick(cardImageElement, cardTitleElement) {
-  console.log(cardImageElement);
-  //cardImageElement.addEventListener("click", () => {
-  const modalCaption = document.querySelector(".modal__caption");
-  openModal(previewCardModal);
-  modalPreviewImageElement.src = cardImageElement.src;
-  modalPreviewImageElement.alt = cardImageElement.alt;
-  modalCaption.textContent = cardTitleElement.textContent;
-  return;
-  //});
+const popupWithImage = new PopupWithImage("#preview-card-modal");
+popupWithImage.setEventListeners();
+
+function handleImageClick(cardData) {
+  popupWithImage.open(cardData);
+  // console.log(cardImageElement);
+  // //cardImageElement.addEventListener("click", () => {
+  // const modalCaption = document.querySelector(".modal__caption");
+  // openModal(previewCardModal);
+  // modalPreviewImageElement.src = cardImageElement.src;
+  // modalPreviewImageElement.alt = cardImageElement.alt;
+  // modalCaption.textContent = cardTitleElement.textContent;
+  // return;
+  // //});
 }
 
 /*
@@ -281,7 +304,9 @@ function handleProfileEditSubmit(e) {
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
-  closeModal(profileEditModal);
+  // call the .close()
+  //editProfileModal.close();
+  //closeModal(profileEditModal);
   return;
 }
 
@@ -291,8 +316,8 @@ function handleAddCardFormSubmit(e) {
   const link = cardURLInput.value;
   renderCard({ name, link }, cardsWrap);
   closeModal(addCardModal);
-
-  addFormValidator.toggleButtonStatePublicMethod();
+  //newCardModal.close();
+  addFormValidator.resetForm();
 }
 
 /* -------------------------------------------------------------------------- */
@@ -305,9 +330,9 @@ function handleAddCardFormSubmit(e) {
 //});
 
 //profileEditModalCloseButton.addEventListener("click", closeModal);
-profileEditModalCloseButton.addEventListener("click", () =>
-  closeModal(profileEditModal)
-);
+// profileEditModalCloseButton.addEventListener("click", () =>
+//  closeModal(profileEditModal)
+//);
 
 // Form Listeners
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
@@ -317,7 +342,9 @@ profileEditButton.addEventListener("click", () => {
   //profileTitleInput.value = profileTitle.textContent;
   //profileDescriptionInput.value = profileDescription.textContent;
   fillProfileForm();
-  openModal(profileEditModal);
+  // Use .open() method
+  editProfileModal.open();
+  //openModal(profileEditModal);
 });
 //add new card button
 addNewCardButton.addEventListener("click", () => openModal(addCardModal));
@@ -333,9 +360,24 @@ previewCardModalCloseButton.addEventListener("click", () =>
   const card = initialCards[i];
 } alternative iterative statement that could've have been used*/
 
+/* --------------------------- Card Initialization -------------------------- */
+//comment out line 363 b/c the Section class will now do it
+//instantiating it only runs the constructor
+//inside renderer-create the card and then call section.add item and pass in new card
+const cardSection = new Section(
+  {
+    items: initialCards,
+    renderer: (cardData) => {
+      cardSection.addItem(createCard(cardData));
+    },
+  },
+  ".cards__list"
+);
+cardSection.renderItems();
+
 //Iterate through the card data that we initially have and
 //run the function getCardElement on each index
-initialCards.forEach((cardData) => renderCard(cardData, cardsWrap));
+//initialCards.forEach((cardData) => renderCard(cardData, cardsWrap));
 
 /*const likeButtons = document.querySelectorAll(".card__like-button");
 likeButtons.forEach((likeButton) => {
