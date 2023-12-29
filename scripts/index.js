@@ -4,7 +4,8 @@ import PopupWithForm from "../components/PopupWithForm.js";
 //import { config } from "./validation.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
-
+import UserInfo from "../components/UserInfo.js";
+//import initialCards from ".utils/constands.js";
 //Create instances of the classes
 //const CardPreview = new PopupWithImage(selectors.previewCardModal);
 
@@ -146,49 +147,49 @@ addFormValidator.enableValidation();
 /* -------------------------------------------------------------------------- */
 /*                                  Functions                                 */
 /* -------------------------------------------------------------------------- */
-function handleEsc(e) {
+/*function handleEsc(e) {
   if (e.key === "Escape") {
     const modal = document.querySelector(".modal_opened");
     //console.log(modal);
-    closeModal(modal);
-  }
-}
+    // closeModal(modal);
+  } 
+} */
 
-function openModal(modal) {
+/*function openModal(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", handleEsc);
   return;
-}
+} */
 
-function closeModal(modal) {
+/*function closeModal(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", handleEsc);
   return;
-}
+} */
 
-function handleOverlay(evt, modal) {
+/*function handleOverlay(evt, modal) {
   if (evt.target.classList.contains("modal_opened")) {
     console.log("testing 1225");
     console.log(evt.target.classList);
     closeModal(modal);
   }
-}
+} */
 
 ///Step 3- Preview Card Modal Closing Event Listener
-previewCardModal.addEventListener("click", function (evt) {
+/*previewCardModal.addEventListener("click", function (evt) {
   //console.log(evt.target.classList);
   handleOverlay(evt, previewCardModal);
-});
+}); */
 
 ///Step 3-Profile Edit Modal Closing Event Listener
-profileEditModal.addEventListener("click", function (evt) {
+/*profileEditModal.addEventListener("click", function (evt) {
   handleOverlay(evt, profileEditModal);
-});
+}); */
 
 ///Step 3-Profile Add Modal Closing Event Listener
-addCardModal.addEventListener("click", function (evt) {
+/*addCardModal.addEventListener("click", function (evt) {
   handleOverlay(evt, addCardModal);
-});
+}); */
 
 function fillProfileForm() {
   profileTitleInput.value = profileTitle.textContent;
@@ -305,18 +306,18 @@ function handleProfileEditSubmit(e) {
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
   // call the .close()
-  //editProfileModal.close();
+  editProfileModal.close();
   //closeModal(profileEditModal);
   return;
 }
 
 function handleAddCardFormSubmit(e) {
-  e.preventDefault();
+  console.log(e);
   const name = cardTitleInput.value;
   const link = cardURLInput.value;
   renderCard({ name, link }, cardsWrap);
-  closeModal(addCardModal);
-  //newCardModal.close();
+  //closeModal(addCardModal);
+  newCardModal.close();
   addFormValidator.resetForm();
 }
 
@@ -336,7 +337,7 @@ function handleAddCardFormSubmit(e) {
 
 // Form Listeners
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
-addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);
+//addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);
 
 profileEditButton.addEventListener("click", () => {
   //profileTitleInput.value = profileTitle.textContent;
@@ -347,13 +348,15 @@ profileEditButton.addEventListener("click", () => {
   //openModal(profileEditModal);
 });
 //add new card button
-addNewCardButton.addEventListener("click", () => openModal(addCardModal));
+addNewCardButton.addEventListener("click", () => newCardModal.open()); //openModal(addCardModal));
 addCardModalCloseButton.addEventListener("click", () =>
-  closeModal(addCardModal)
+  //closeModal(addCardModal)
+  newCardModal.close()
 );
 
 previewCardModalCloseButton.addEventListener("click", () =>
-  closeModal(previewCardModal)
+  //closeModal(previewCardModal)
+  popupWithImage.close()
 );
 
 /*for (let i = 0; i < initialCards.length; i++) {

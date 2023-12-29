@@ -15,16 +15,14 @@ export default class Popup {
   close() {
     this._popupElement.classList.remove("modal_opened");
     document.removeEventListener("keydown", this._handleEscClose);
-    return;
   }
 
   //listens for esc button
-  _handleEscClose(evt) {
-    debugger;
+  _handleEscClose = (evt) => {
     if (evt.key === "Escape") {
       this.close();
     }
-  }
+  };
 
   //sets event listeners
   //create an event listener for click on the CLOSE button or popup half-transparent background
