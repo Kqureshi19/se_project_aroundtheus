@@ -1,6 +1,7 @@
-//intial cards
+//1-Initial Cards
+//2-Settings Object
 
-export default const initialCards = [
+export const initialCards = [
   {
     name: "Lake Louise",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
@@ -31,7 +32,17 @@ export default const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg ",
   },
 ];
+
 //settings object
+
+export const settings = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__save-button",
+  inactiveButtonClass: "modal__save-button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
 //modal config---- add card/ edit card/ preview image card
 const modalConfig = {
   editModalFormSelector: ".edit-modal",

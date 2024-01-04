@@ -19,7 +19,7 @@ export default class PopupWithForm extends Popup {
   //This will be passed to the submission handler as an argument
   _getInputValues() {
     this._formDataObj = {}; //create empty object
-    this._inputValues = document.querySelectorAll(".modal__input"); //can probably move to constructor?
+    this._inputValues = this._popupForm.querySelectorAll(".modal__input"); //can probably move to constructor?
     this._inputValues.forEach((inputElement) => {
       this._formDataObj[inputElement.name] = inputElement.value; //add a fieldname:fieldvalue pair as an object
     });

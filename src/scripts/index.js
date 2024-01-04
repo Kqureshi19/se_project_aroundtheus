@@ -1,3 +1,4 @@
+import "../pages/index.css";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import PopupWithForm from "../components/PopupWithForm.js";
@@ -5,41 +6,10 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
-//import initialCards from ".utils/constands.js";
+import { initialCards, settings } from "../utils/constants.js";
+console.log(settings);
 //Create instances of the classes
 //const CardPreview = new PopupWithImage(selectors.previewCardModal);
-
-const initialCards = [
-  {
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-  },
-
-  {
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-  },
-
-  {
-    name: "Bald Mountains",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-  },
-
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-  },
-
-  {
-    name: "Vanoise National Park",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-  },
-
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg ",
-  },
-];
 
 //console.log(typeof initialCards);
 const cardData = {
@@ -123,14 +93,14 @@ const cardURLInput = addCardFormElement.querySelector(
   ".modal__input_type_link"
 );
 
-const settings = {
+/*const settings = {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",
   submitButtonSelector: ".modal__save-button",
   inactiveButtonClass: "modal__save-button_disabled",
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_visible",
-};
+}; */
 
 /* -------------------------------------------------------------------------- */
 /*                                  Validation                                */
@@ -191,11 +161,13 @@ addFormValidator.enableValidation();
   handleOverlay(evt, addCardModal);
 }); */
 
-function fillProfileForm() {
+/*function fillProfileForm() {
+  //const info = uinfo.getUserInfo();
+  //console.log("info: " + info);
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
   return;
-}
+} */
 //This is where we instantiate the card class
 //cardData is {name, link}, i.e. grab the specific data and pass it to getView()
 /*function renderCard(cardData, wrapper) {
@@ -301,13 +273,34 @@ i.e. you have to append it
 /*                               Event Handlers                               */
 /* -------------------------------------------------------------------------- */
 
-function handleProfileEditSubmit(e) {
-  e.preventDefault();
-  profileTitle.textContent = profileTitleInput.value;
-  profileDescription.textContent = profileDescriptionInput.value;
+const userInfo = new UserInfo(".profile__title", ".profile__description");
+
+function handleProfileEditSubmit(inputValues) {
+  //console.log(e);
+  //e.preventDefault();
+  userInfo.setUserInfo(profileTitleInput.value, profileDescriptionInput.value);
+  console.log("profileTitleInput.value: " + profileTitleInput.value);
+  //profileTitle.textContent = profileTitleInput.value;
+  //console.log("profileTitle.textContent:" + profileTitle.textContent);
+  //profileDescription.textContent = profileDescriptionInput.value;
   // call the .close()
   editProfileModal.close();
   //closeModal(profileEditModal);
+  return;
+}
+
+function fillProfileForm() {
+  const infoObj = userInfo.getUserInfo();
+  //console.log("info: " + infoObj);
+  console.log("profileTitleInput.value:" + profileTitleInput.value);
+  profileTitleInput.value = infoObj.name;
+  profileDescriptionInput.value = infoObj.description;
+  console.log("profileTitleInput.value: " + profileTitleInput.value);
+  // console.log(
+  //   "profileDescriptionInput.value: " + profileDescriptionInput.value
+  // );
+  //profileTitleInput.value = profileTitle.textContent;
+  //profileDescriptionInput.value = profileDescription.textContent;
   return;
 }
 
@@ -336,7 +329,7 @@ function handleAddCardFormSubmit(e) {
 //);
 
 // Form Listeners
-profileEditForm.addEventListener("submit", handleProfileEditSubmit);
+//profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 //addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);
 
 profileEditButton.addEventListener("click", () => {
