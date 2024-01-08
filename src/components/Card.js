@@ -49,15 +49,19 @@ export default class Card {
     this._cardElement = null;
   }
 
+  _getElement() {
+    this._cardElement = document
+      .querySelector(this._cardSelector)
+      .content.querySelector(".card")
+      .cloneNode(true);
+  }
+
   //Public Method-since you can access it outside its class
   //this is the entrance point to your card, which will be used/called in index.js
   //1.Grab the template first and clone it (i.e cardSelector = #card-template)
   //2. Add data to the template clone & call setEventListersn() method and return new card
   getView() {
-    this._cardElement = document
-      .querySelector(this._cardSelector)
-      .content.querySelector(".card")
-      .cloneNode(true);
+    this._getElement();
 
     this._cardImage = this._cardElement.querySelector(".card__image");
     this._cardTitle = this._cardElement.querySelector(".card__title");

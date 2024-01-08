@@ -9,7 +9,7 @@ export default class PopupWithForm extends Popup {
     this._popupForm = this._popupElement.querySelector(".modal__form");
     this._handleFormSubmit = handleFormSubmit;
   }
-
+  //can remove this 13-16
   close() {
     this._popupForm.reset();
     super.close();
@@ -18,12 +18,12 @@ export default class PopupWithForm extends Popup {
   //collects data from all input fields and returns it as an object
   //This will be passed to the submission handler as an argument
   _getInputValues() {
-    this._formDataObj = {}; //create empty object
+    const formDataObj = {}; //create empty object
     this._inputValues = this._popupForm.querySelectorAll(".modal__input"); //can probably move to constructor?
     this._inputValues.forEach((inputElement) => {
-      this._formDataObj[inputElement.name] = inputElement.value; //add a fieldname:fieldvalue pair as an object
+      formDataObj[inputElement.name] = inputElement.value; //add a fieldname:fieldvalue pair as an object
     });
-    return this._formDataObj; //returns data as an object
+    return formDataObj; //returns data as an object
   }
 
   //overrides setEventListeners() parent method

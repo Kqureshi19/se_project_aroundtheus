@@ -2,12 +2,11 @@ import "../pages/index.css";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import PopupWithForm from "../components/PopupWithForm.js";
-//import { config } from "./validation.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import { initialCards, settings } from "../utils/constants.js";
-console.log(settings);
+
 //Create instances of the classes
 //const CardPreview = new PopupWithImage(selectors.previewCardModal);
 
@@ -186,7 +185,8 @@ function createCard(cardData) {
 
 function renderCard(cardData, wrapper) {
   const cardElement = createCard(cardData);
-  wrapper.prepend(cardElement);
+  //wrapper.prepend(cardElement);
+  cardSection.addItem(cardElement);
 }
 
 //1-find delete button
@@ -311,7 +311,7 @@ function handleAddCardFormSubmit(e) {
   renderCard({ name, link }, cardsWrap);
   //closeModal(addCardModal);
   newCardModal.close();
-  addFormValidator.resetForm();
+  //addFormValidator.resetForm();
 }
 
 /* -------------------------------------------------------------------------- */
@@ -341,7 +341,11 @@ profileEditButton.addEventListener("click", () => {
   //openModal(profileEditModal);
 });
 //add new card button
-addNewCardButton.addEventListener("click", () => newCardModal.open()); //openModal(addCardModal));
+addNewCardButton.addEventListener(
+  "click",
+  () => addFormValidator.resetForm(),
+  newCardModal.open()
+); //openModal(addCardModal));
 addCardModalCloseButton.addEventListener("click", () =>
   //closeModal(addCardModal)
   newCardModal.close()

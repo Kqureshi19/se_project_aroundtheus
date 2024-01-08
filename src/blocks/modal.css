@@ -133,10 +133,15 @@
 
 .modal__save-button_disabled {
   opacity: 0.1;
+  cursor: default;
 }
 
 .modal__save-button:hover {
   opacity: 0.5;
+}
+
+.modal__save-button_:disabled {
+  opacity: 0.1;
 }
 
 .modal__preview-image {
