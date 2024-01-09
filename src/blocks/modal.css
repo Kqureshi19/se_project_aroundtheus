@@ -140,7 +140,7 @@
   opacity: 0.5;
 }
 
-.modal__save-button_:disabled {
+.modal__save-button_:disabled:hover {
   opacity: 0.1;
 }
 

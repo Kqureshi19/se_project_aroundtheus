@@ -50,7 +50,7 @@ export default class Card {
   }
 
   _getElement() {
-    this._cardElement = document
+    return document
       .querySelector(this._cardSelector)
       .content.querySelector(".card")
       .cloneNode(true);
@@ -61,8 +61,7 @@ export default class Card {
   //1.Grab the template first and clone it (i.e cardSelector = #card-template)
   //2. Add data to the template clone & call setEventListersn() method and return new card
   getView() {
-    this._getElement();
-
+    this._cardElement = this._getElement();
     this._cardImage = this._cardElement.querySelector(".card__image");
     this._cardTitle = this._cardElement.querySelector(".card__title");
     this._cardImage.src = this._link;

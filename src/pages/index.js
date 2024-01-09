@@ -340,12 +340,15 @@ profileEditButton.addEventListener("click", () => {
   editProfileModal.open();
   //openModal(profileEditModal);
 });
+
 //add new card button
-addNewCardButton.addEventListener(
-  "click",
-  () => newCardModal.open(),
-  addFormValidator.resetForm()
-); //openModal(addCardModal));
+addNewCardButton.addEventListener("click", () => {
+  // reset the validation
+  addFormValidator.resetForm();
+  // open the popup
+  newCardModal.open();
+});
+
 addCardModalCloseButton.addEventListener("click", () =>
   //closeModal(addCardModal)
   newCardModal.close()
