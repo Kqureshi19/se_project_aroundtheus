@@ -343,8 +343,8 @@ profileEditButton.addEventListener("click", () => {
 //add new card button
 addNewCardButton.addEventListener(
   "click",
-  () => addFormValidator.resetForm(),
-  newCardModal.open()
+  () => newCardModal.open(),
+  addFormValidator.resetForm()
 ); //openModal(addCardModal));
 addCardModalCloseButton.addEventListener("click", () =>
   //closeModal(addCardModal)
