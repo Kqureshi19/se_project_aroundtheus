@@ -1,4 +1,4 @@
-class Api {
+class API {
   constructor({ baseUrl, authToken }) {
     this._baseUrl = baseUrl;
     this._authToken = authToken;
@@ -36,7 +36,7 @@ class Api {
 }
 
 //This is a new instance of the API class
-const api = new Api({
+const api = new API({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
     authorization: "8cc40c96-6d80-4c6a-90ea-7b1349997b2d",
