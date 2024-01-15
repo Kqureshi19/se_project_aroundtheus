@@ -5,8 +5,15 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
+import Api from "../components/API.js";
 import { initialCards, settings } from "../utils/constants.js";
 
+const api = new API({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  authToken: "8cc40c96-6d80-4c6a-90ea-7b1349997b2d",
+});
+
+api.getInitialCards().then((res => console.log(res))
 //Create instances of the classes
 //const CardPreview = new PopupWithImage(selectors.previewCardModal);
 
