@@ -4,11 +4,22 @@ class API {
     this._authToken = authToken;
   }
 
+  _handleResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+  }
+  _handleError(err) {
+    return Promise.reject(`Error: ${res.status}`).catch((err) => {
+      console.error(err); // log the error to the console
+    });
+  }
+
   //GET /cards – Get all cards
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: {
-        authorization: "this._authToken",
+        authorization: this._authToken,
       },
     }).then((res) => {
       if (res.ok) {

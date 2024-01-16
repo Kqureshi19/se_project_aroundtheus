@@ -5,23 +5,13 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
-import API from "../components/API.js";
+import api from "../components/API.js";
 import { initialCards, settings } from "../utils/constants.js";
 
-const api = new API({
-  baseUrl: "https://around-api.en.tripleten-services.com/v1",
-  authToken: "8cc40c96-6d80-4c6a-90ea-7b1349997b2d",
-});
-
-api.getInitialCards().then((res) => console.log(res));
 //Create instances of the classes
 //const CardPreview = new PopupWithImage(selectors.previewCardModal);
 
 //console.log(typeof initialCards);
-const cardData = {
-  name: "Lake Louise",
-  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-};
 
 /* -------------------------------------------------------------------------- */
 /*                                 Card-Card Class                            */
@@ -374,9 +364,12 @@ previewCardModalCloseButton.addEventListener("click", () =>
 //comment out line 363 b/c the Section class will now do it
 //instantiating it only runs the constructor
 //inside renderer-create the card and then call section.add item and pass in new card
+
+api.getInitialCards().then((res) => console.log(res));
+
 const cardSection = new Section(
   {
-    items: initialCards,
+    items: res,
     renderer: (cardData) => {
       cardSection.addItem(createCard(cardData));
     },
