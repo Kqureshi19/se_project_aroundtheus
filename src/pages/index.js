@@ -5,9 +5,24 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
-import api from "../components/API.js";
+import API from "../components/API.js";
 import { initialCards, settings } from "../utils/constants.js";
 
+//This is a new instance of the API class
+const api = new API({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "7d078757-23ed-414e-a9d7-d63a6269c72c",
+    "Content-Type": "application/json",
+  },
+});
+
+console.log("testing!!!");
+api.getInitialCards().then((res) => console.log(res));
+api.getUserInfo().then((res) => console.log("User Info is: ", res));
+//api.getUserInfo().then(userInfo); //=>{
+//   console.log("The User Info is :"+ userInfo);
+// }
 //Create instances of the classes
 //const CardPreview = new PopupWithImage(selectors.previewCardModal);
 
@@ -364,8 +379,6 @@ previewCardModalCloseButton.addEventListener("click", () =>
 //comment out line 363 b/c the Section class will now do it
 //instantiating it only runs the constructor
 //inside renderer-create the card and then call section.add item and pass in new card
-
-api.getInitialCards().then((res) => console.log(res));
 
 const cardSection = new Section(
   {
