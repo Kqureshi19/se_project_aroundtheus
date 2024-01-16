@@ -6,7 +6,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import api from "../components/API.js";
-import { settings } from "../utils/constants.js";
+import { initialCards, settings } from "../utils/constants.js";
 
 //Create instances of the classes
 //const CardPreview = new PopupWithImage(selectors.previewCardModal);
@@ -369,7 +369,7 @@ api.getInitialCards().then((res) => console.log(res));
 
 const cardSection = new Section(
   {
-    items: res,
+    items: initialCards,
     renderer: (cardData) => {
       cardSection.addItem(createCard(cardData));
     },
