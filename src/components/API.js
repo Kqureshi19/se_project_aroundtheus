@@ -42,11 +42,14 @@ export default class API {
   }
 
   //PATCH /users/me – Update your profile information
-  updateUserInfo(data) {
+  updateUserInfo(name, about) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        name,
+        about,
+      }),
     }).then(this._handleResponse);
   }
 

@@ -20,6 +20,20 @@ const api = new API({
 console.log("testing!!!");
 api.getInitialCards().then((res) => console.log(res));
 api.getUserInfo().then((res) => console.log("User Info is: ", res));
+
+api.getUserInfo().then((res) => {
+  console.log(1111111111, res);
+  console.log("res.name: ", res.name);
+  console.log("res.about: ", res.about);
+
+  userInfo.setUserInfo(res.name, res.about);
+});
+
+api.updateUserInfo(res).then((res) => {
+  console.log("User Info is: ", res);
+  UserInfo.setUserInfo(res.name, res.description);
+});
+
 //api.getUserInfo().then(userInfo); //=>{
 //   console.log("The User Info is :"+ userInfo);
 // }
@@ -411,8 +425,4 @@ likeButtons.forEach((likeButton) => {
   });
 }); */
 
-api.getUserInfo().then((res) => console.log("User Info is: ", res));
-
-api.getUserInfo().then((res) => {
-  console.log(1, res);
-});
+console.log("testing98");
