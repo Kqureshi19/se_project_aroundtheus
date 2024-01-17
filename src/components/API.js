@@ -53,7 +53,7 @@ export default class API {
   //PATCH /users/me/avatar – Update avatar
   setUserAvatar(avatarData) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
-      method: "GET",
+      method: "PATCH",
       headers: this._headers,
       body: JSON.stringify(avatarData),
     }).then(this._handleResponse);

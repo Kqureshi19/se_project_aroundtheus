@@ -382,15 +382,24 @@ previewCardModalCloseButton.addEventListener("click", () =>
 
 const cardSection = new Section(
   {
-    items: initialCards,
+    //items: initialCards,
     renderer: (cardData) => {
       cardSection.addItem(createCard(cardData));
     },
   },
   ".cards__list"
 );
+//cardSection.renderItems();
+api.getInitialCards().then((cardData) => {
+  //  cardSection = new Section(
+  //   {
+  //     cards: cardData,
+  //     renderer: (cardData) => {
+  //       cardSection.addItem(createCard(cardData));
+  //     },
+  cardSection.renderItems(initialCards);
+});
 cardSection.renderItems();
-
 //Iterate through the card data that we initially have and
 //run the function getCardElement on each index
 //initialCards.forEach((cardData) => renderCard(cardData, cardsWrap));
@@ -401,3 +410,9 @@ likeButtons.forEach((likeButton) => {
     likeButton.classList.toggle("card__like-button_active");
   });
 }); */
+
+api.getUserInfo().then((res) => console.log("User Info is: ", res));
+
+api.getUserInfo().then((res) => {
+  console.log(1, res);
+});
