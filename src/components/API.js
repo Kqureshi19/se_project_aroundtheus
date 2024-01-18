@@ -53,6 +53,18 @@ export default class API {
     }).then(this._handleResponse);
   }
 
+  //5-POST /cards – Create a card
+  addCard({ name, link }) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify({
+        name,
+        link,
+      }),
+    }).then(this._handleResponse);
+  }
+
   //PATCH /users/me/avatar – Update avatar
   setUserAvatar(avatarData) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
@@ -63,9 +75,12 @@ export default class API {
   }
 
   // other methods for working with the API
-  //PATCH /users/me – Update your profile information
-  //POST /cards – Create a card
-  //DELETE /cards/:cardId – Delete a card
-  //PUT /cards/:cardId/likes – Like a card
-  //DELETE /cards/:cardId/likes – Dislike a card
+  //1-GET /users/me – Get the current user’s info
+  //2*-PATCH /users/me – Update your profile information
+  //3-PATCH /users/me/avatar – Update avatar
+  //4*-GET /cards – Get all cards
+  //5-POST /cards – Create a card
+  //6-DELETE /cards/:cardId – Delete a card
+  //7-PUT /cards/:cardId/likes – Like a card
+  //8-DELETE /cards/:cardId/likes – Dislike a card
 }

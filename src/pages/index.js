@@ -18,7 +18,7 @@ const api = new API({
 });
 
 console.log("testing!!!");
-api.getInitialCards().then((res) => console.log(res));
+//api.getInitialCards().then((res) => console.log(res));
 api.getUserInfo().then((res) => console.log("User Info is: ", res));
 
 api.getUserInfo().then((res) => {
@@ -29,10 +29,10 @@ api.getUserInfo().then((res) => {
   userInfo.setUserInfo(res.name, res.about);
 });
 
-api.updateUserInfo(res).then((res) => {
-  console.log("User Info is: ", res);
-  UserInfo.setUserInfo(res.name, res.description);
-});
+// api.updateUserInfo(res).then((res) => {
+//   console.log("User Info is: ", res);
+//   UserInfo.setUserInfo(res.name, res.description);
+// });
 
 //api.getUserInfo().then(userInfo); //=>{
 //   console.log("The User Info is :"+ userInfo);
@@ -302,8 +302,12 @@ i.e. you have to append it
 const userInfo = new UserInfo(".profile__title", ".profile__description");
 
 function handleProfileEditSubmit(inputValues) {
-  //console.log(e);
-  //e.preventDefault();
+  console.log(22222222, inputValues);
+  api.updateUserInfo(inputValues).then((inputValues) => {
+    console.log("InputValues: ", inputValues);
+    //UserInfo.setUserInfo(res.name, res.description);
+  });
+
   userInfo.setUserInfo(profileTitleInput.value, profileDescriptionInput.value);
   console.log("profileTitleInput.value: " + profileTitleInput.value);
   //profileTitle.textContent = profileTitleInput.value;
@@ -312,7 +316,6 @@ function handleProfileEditSubmit(inputValues) {
   // call the .close()
   editProfileModal.close();
   //closeModal(profileEditModal);
-  return;
 }
 
 function fillProfileForm() {
@@ -330,14 +333,22 @@ function fillProfileForm() {
   return;
 }
 
-function handleAddCardFormSubmit(e) {
-  console.log(e);
-  const name = cardTitleInput.value;
-  const link = cardURLInput.value;
-  renderCard({ name, link }, cardsWrap);
-  //closeModal(addCardModal);
-  newCardModal.close();
-  //addFormValidator.resetForm();
+// function handleAddCardFormSubmit(e) {
+//   console.log(e);
+//   const name = cardTitleInput.value;
+//   const link = cardURLInput.value;
+//   renderCard({ name, link }, cardsWrap);
+//   //closeModal(addCardModal);
+//   newCardModal.close();
+//   //addFormValidator.resetForm();
+// }
+
+function handleAddCardFormSubmit({ title, url }) {
+  api.addCard({ name: title, link: url }).then((data) => {
+    console.log(3333333, data);
+
+    Section.addItem({ name: title, link: url });
+  });
 }
 
 /* -------------------------------------------------------------------------- */
@@ -394,26 +405,33 @@ previewCardModalCloseButton.addEventListener("click", () =>
 //instantiating it only runs the constructor
 //inside renderer-create the card and then call section.add item and pass in new card
 
-const cardSection = new Section(
-  {
-    //items: initialCards,
-    renderer: (cardData) => {
-      cardSection.addItem(createCard(cardData));
+// const cardSection = new Section(
+//   {
+//     items: initialCards,
+//     renderer: (cardData) => {
+//       cardSection.addItem(createCard(cardData));
+//     },
+//   },
+//   ".cards__list"
+// );
+// cardSection.renderItems();
+
+//declare the variable cardSection, but its value is undefined
+//we define it moments later...
+let cardSection;
+api.getInitialCards().then((cards) => {
+  cardSection = new Section(
+    {
+      items: cards,
+      renderer: (cardData) => {
+        cardSection.addItem(createCard(cardData));
+      },
     },
-  },
-  ".cards__list"
-);
-//cardSection.renderItems();
-api.getInitialCards().then((cardData) => {
-  //  cardSection = new Section(
-  //   {
-  //     cards: cardData,
-  //     renderer: (cardData) => {
-  //       cardSection.addItem(createCard(cardData));
-  //     },
-  cardSection.renderItems(initialCards);
+    ".cards__list"
+  );
+  cardSection.renderItems();
 });
-cardSection.renderItems();
+
 //Iterate through the card data that we initially have and
 //run the function getCardElement on each index
 //initialCards.forEach((cardData) => renderCard(cardData, cardsWrap));
