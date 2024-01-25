@@ -1,11 +1,19 @@
 //Class Card will have 3 parameters, 1. data 2. cardSelector 3. handleImageClick
 //getview() is the entry point, it is the only public method in this class
 export default class Card {
-  constructor({ name, link }, cardSelector, handleImageClick) {
+  constructor(
+    { name, link, _id, isLiked },
+    cardSelector,
+    handleImageClick,
+    handleCardDeleteClick
+  ) {
     this._name = name;
     this._link = link;
+    this._id = _id;
+    this._isLiked = isLiked;
     this._cardSelector = cardSelector; //this is the template of the card, i.e cardSelector = #card-template
     this._handleImageClick = handleImageClick;
+    this._handleCardDeleteClick = handleCardDeleteClick;
   }
 
   //Set the Event Listeners for the following (3):
@@ -25,7 +33,9 @@ export default class Card {
     this._cardElement
       .querySelector(".card__trash-button")
       .addEventListener("click", () => {
-        this._handleDeleteCard();
+        // this is done locally, subsequent line is deleted on server--this._handleDeleteCard();
+        //debugger;
+        this._handleCardDeleteClick(this);
       });
     // this._cardImageElement = this._cardElement.querySelector(".card__image");
     // this._cardTitleElement = this._cardElement.querySelector(".card__title");
@@ -44,7 +54,7 @@ export default class Card {
     //this._cardElement.classList.toggle("card__like-button_active");
   }
 
-  _handleDeleteCard() {
+  handleDeleteCard() {
     this._cardElement.remove();
     this._cardElement = null;
   }
@@ -66,8 +76,8 @@ export default class Card {
     this._cardTitle = this._cardElement.querySelector(".card__title");
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
-    console.log("right here");
-    console.log("cardSelector: ", this._cardSelector);
+    //console.log("right here");
+    //console.log("cardSelector: ", this._cardSelector);
     this._cardTitle.textContent = this._name;
 
     //console.log(cardElement);

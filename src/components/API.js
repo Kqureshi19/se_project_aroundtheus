@@ -42,7 +42,7 @@ export default class API {
   }
 
   //PATCH /users/me – Update your profile information
-  updateUserInfo(name, about) {
+  updateUserInfo({ name, about }) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
@@ -65,7 +65,17 @@ export default class API {
     }).then(this._handleResponse);
   }
 
+  //in progress****
+  //6-DELETE /cards/:cardId – Delete a card
+  deleteCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then(this._handleResponse);
+  }
+
   //PATCH /users/me/avatar – Update avatar
+  //avatarData-property should contain a link to the new profile picture
   setUserAvatar(avatarData) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
@@ -75,12 +85,12 @@ export default class API {
   }
 
   // other methods for working with the API
-  //1-GET /users/me – Get the current user’s info
+  //1*-GET /users/me – Get the current user’s info
   //2*-PATCH /users/me – Update your profile information
-  //3-PATCH /users/me/avatar – Update avatar
+  //3*-PATCH /users/me/avatar – Update avatar
   //4*-GET /cards – Get all cards
-  //5-POST /cards – Create a card
-  //6-DELETE /cards/:cardId – Delete a card
+  //5*-POST /cards – Create a card
+  //6*-DELETE /cards/:cardId – Delete a card
   //7-PUT /cards/:cardId/likes – Like a card
   //8-DELETE /cards/:cardId/likes – Dislike a card
 }

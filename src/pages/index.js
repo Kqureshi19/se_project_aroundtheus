@@ -7,6 +7,7 @@ import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import API from "../components/API.js";
 import { initialCards, settings } from "../utils/constants.js";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 
 //This is a new instance of the API class
 const api = new API({
@@ -22,7 +23,7 @@ console.log("testing!!!");
 api.getUserInfo().then((res) => console.log("User Info is: ", res));
 
 api.getUserInfo().then((res) => {
-  console.log(1111111111, res);
+  console.log("res:", res);
   console.log("res.name: ", res.name);
   console.log("res.about: ", res.about);
 
@@ -204,8 +205,20 @@ addFormValidator.enableValidation();
   wrapper.prepend(cardElement);
 } */
 
+function handleCardDeleteClick(data) {
+  //console.log(data);
+  api.deleteCard(data);
+}
+
 function createCard(cardData) {
-  const cardElement = new Card(cardData, "#card-template", handleImageClick);
+  const cardElement = new Card(
+    cardData,
+    "#card-template",
+    handleImageClick,
+    handleDeleteConfirmation,
+    //handleCardDeleteClick
+    handleAvatarEditForm
+  );
   return cardElement.getView();
 }
 
@@ -214,6 +227,12 @@ function renderCard(cardData, wrapper) {
   //wrapper.prepend(cardElement);
   cardSection.addItem(cardElement);
 }
+
+/*
+ const confirmdelete click = new Popupwithform(
+  popupselector:
+ )
+*/
 
 //1-find delete button
 //2-add event listener to the delete button
@@ -302,14 +321,21 @@ i.e. you have to append it
 const userInfo = new UserInfo(".profile__title", ".profile__description");
 
 function handleProfileEditSubmit(inputValues) {
-  console.log(22222222, inputValues);
+  console.log("inputValues:", inputValues);
   api.updateUserInfo(inputValues).then((inputValues) => {
-    console.log("InputValues: ", inputValues);
+    //console.log("res:", res);
+
+    // console.log("res.name: ", res.name);
+    // console.log("res.about: ", res.about);
+
+    // console.log("res.description: ", res.description);
+    // console.log(888888888);
     //UserInfo.setUserInfo(res.name, res.description);
+    userInfo.setUserInfo(inputValues.name, inputValues.about);
   });
 
-  userInfo.setUserInfo(profileTitleInput.value, profileDescriptionInput.value);
-  console.log("profileTitleInput.value: " + profileTitleInput.value);
+  //userInfo.setUserInfo(profileTitleInput.value, profileDescriptionInput.value);
+  //console.log("profileTitleInput.value: " + profileTitleInput.value);
   //profileTitle.textContent = profileTitleInput.value;
   //console.log("profileTitle.textContent:" + profileTitle.textContent);
   //profileDescription.textContent = profileDescriptionInput.value;
@@ -343,11 +369,17 @@ function fillProfileForm() {
 //   //addFormValidator.resetForm();
 // }
 
-function handleAddCardFormSubmit({ title, url }) {
-  api.addCard({ name: title, link: url }).then((data) => {
-    console.log(3333333, data);
-
-    Section.addItem({ name: title, link: url });
+/*api pseudocode:
+1-create the card
+2-add the card to the DOM
+3-close the popup */
+function handleAddCardFormSubmit(inputValues) {
+  console.log(3333333, inputValues);
+  api.addCard(inputValues).then((cardData) => {
+    const card = createCard(cardData);
+    cardSection.addItem(card);
+    //console.log(card);
+    newCardModal.close();
   });
 }
 
@@ -432,6 +464,52 @@ api.getInitialCards().then((cards) => {
   cardSection.renderItems();
 });
 
+const deleteConfirmationModal = new PopupWithConfirmation(
+  "#delete-confirmation-modal"
+);
+deleteConfirmationModal.setEventListeners();
+
+//1-open the delete confirmation modal
+//2-call the modal's  setSubmitAction (its a public method)
+//3-call the API to delete the card from the server
+//4-if the API is successfull, it will delete from server, make sure to delete locally also
+//5-close the modal
+function handleDeleteConfirmation(card) {
+  deleteConfirmationModal.open();
+  deleteConfirmationModal.setSubmitAction(() => {
+    api.deleteCard(card._id).then(() => {
+      card.handleDeleteCard();
+      deleteConfirmationModal.close();
+    });
+  });
+}
+
+//Edit Profile Avatar-Pseudocode:
+//1-Grab the editIcon button class & then add an event listener to it
+//2-Add event listner with  "click", the edit popup avatar form should open
+//3-Instantiate thew editAvatarPopup form using the class PopupWithForm
+
+const editAvatarButton = document.querySelector(".editicon");
+editAvatarButton.addEventListener("click", () => {
+  console.log("you clicked on editAvatarButton");
+  editAvatarPopup.open();
+});
+
+const editAvatarPopup = new PopupWithForm(
+  "#edit-avatar-modal",
+  handleAvatarEditForm
+);
+editAvatarPopup.setEventListeners();
+
+function handleAvatarEditForm(_getInputValues) {
+  ///
+  console.log("hi");
+
+  console.log("_getInputValues: ", _getInputValues.url);
+  api.setUserAvatar(_getInputValues.url).then((res) => {
+    console.log(res);
+  });
+}
 //Iterate through the card data that we initially have and
 //run the function getCardElement on each index
 //initialCards.forEach((cardData) => renderCard(cardData, cardsWrap));
