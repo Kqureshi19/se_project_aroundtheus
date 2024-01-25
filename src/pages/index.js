@@ -318,7 +318,11 @@ i.e. you have to append it
 /*                               Event Handlers                               */
 /* -------------------------------------------------------------------------- */
 
-const userInfo = new UserInfo(".profile__title", ".profile__description");
+const userInfo = new UserInfo(
+  ".profile__title",
+  ".profile__description",
+  "profile__image"
+);
 
 function handleProfileEditSubmit(inputValues) {
   console.log("inputValues:", inputValues);
@@ -503,11 +507,14 @@ editAvatarPopup.setEventListeners();
 
 function handleAvatarEditForm(_getInputValues) {
   ///
-  console.log("hi");
+  //console.log("hi");
 
-  console.log("_getInputValues: ", _getInputValues.url);
+  //console.log("_getInputValues: ", _getInputValues.url);
   api.setUserAvatar(_getInputValues.url).then((res) => {
-    console.log(res);
+    console.log("res:", res);
+    console.log("_getInputValues.url:", _getInputValues.url);
+    userInfo.setUserAvatar(_getInputValues.url);
+    editAvatarPopup.close();
   });
 }
 //Iterate through the card data that we initially have and

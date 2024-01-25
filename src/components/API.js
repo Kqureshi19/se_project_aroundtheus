@@ -76,11 +76,11 @@ export default class API {
 
   //PATCH /users/me/avatar – Update avatar
   //avatarData-property should contain a link to the new profile picture
-  setUserAvatar(avatarData) {
+  setUserAvatar(url) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
-      body: JSON.stringify(avatarData),
+      body: JSON.stringify({ avatar: url }),
     }).then(this._handleResponse);
   }
 
