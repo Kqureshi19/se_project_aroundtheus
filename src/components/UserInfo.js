@@ -29,7 +29,7 @@ export default class UserInfo {
 
   //set the new avatar as the profile image
   setUserAvatar(avatar) {
-    this._avatar = avatar;
+    this._avatar.src = avatar;
   }
 }
 

@@ -5,7 +5,8 @@ export default class Card {
     { name, link, _id, isLiked },
     cardSelector,
     handleImageClick,
-    handleCardDeleteClick
+    handleCardDeleteClick,
+    handleCardLike
   ) {
     this._name = name;
     this._link = link;
@@ -14,19 +15,33 @@ export default class Card {
     this._cardSelector = cardSelector; //this is the template of the card, i.e cardSelector = #card-template
     this._handleImageClick = handleImageClick;
     this._handleCardDeleteClick = handleCardDeleteClick;
+    this._handleCardLike = handleCardLike;
+    this._cardElement = this._getElement();
+    this._cardImage = this._cardElement.querySelector(".card__image");
+    this._cardTitle = this._cardElement.querySelector(".card__title");
+    this._likeButton = this._cardElement.querySelector(".card__like-button");
+    this.setLikeIcon();
   }
+
+  // setLikeButtonState() {
+  //   if ((isLiked = true)) {
+  //     this.setLikeIcon();
+  //   }
+  // }
 
   //Set the Event Listeners for the following (3):
   //1. Like Button
   //2. Delete Button
   //3. Preview Image
   _setEventListeners() {
-    //".card__like-button" this._handleLikeIcon()
+    //".card__like-button" this._setLikeIcon()
     //1-Handle the Like Button
     this._cardElement
       .querySelector(".card__like-button")
       .addEventListener("click", () => {
-        this._handleLikeIcon();
+        console.log(this._handleCardLike);
+        this._handleCardLike(this);
+        this.setLikeIcon();
       });
 
     //2-Handle the Delete Button
@@ -45,13 +60,23 @@ export default class Card {
     });
   }
 
+  setLikeIcon() {
+    if (this._isLiked) {
+      this._likeButton.classList.add("card__like-button_active");
+    } else {
+      this._likeButton.classList.remove("card__like-button_active");
+    }
+  }
+
   //fyi, cardelement is the current card we are working with
-  _handleLikeIcon() {
-    //console.log("Pressing Like Button from  card class");
-    this._cardElement
-      .querySelector(".card__like-button")
-      .classList.toggle("card__like-button_active");
-    //this._cardElement.classList.toggle("card__like-button_active");
+  handleLikeIcon() {
+    // //console.log("Pressing Like Button from  card class");
+    // this._cardElement
+    //   .querySelector(".card__like-button")
+    //   .classList.toggle("card__like-button_active");
+    // //this._cardElement.classList.toggle("card__like-button_active");
+    this._isLiked = !this._isLiked;
+    this.setLikeIcon();
   }
 
   handleDeleteCard() {
@@ -71,9 +96,9 @@ export default class Card {
   //1.Grab the template first and clone it (i.e cardSelector = #card-template)
   //2. Add data to the template clone & call setEventListersn() method and return new card
   getView() {
-    this._cardElement = this._getElement();
-    this._cardImage = this._cardElement.querySelector(".card__image");
-    this._cardTitle = this._cardElement.querySelector(".card__title");
+    // this._cardElement = this._getElement();
+    // this._cardImage = this._cardElement.querySelector(".card__image");
+    // this._cardTitle = this._cardElement.querySelector(".card__title");
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     //console.log("right here");
@@ -82,6 +107,7 @@ export default class Card {
 
     //console.log(cardElement);
     //This will add all the event listeners when the card is created
+
     this._setEventListeners();
     //1-get the card view
     //2-set event listeners-we are invoking a method, so we are using this

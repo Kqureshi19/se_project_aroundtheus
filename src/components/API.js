@@ -8,13 +8,9 @@ export default class API {
   _handleResponse(res) {
     if (res.ok) {
       return res.json();
+    } else {
+      return Promise.reject(`Error: ${res.status}`);
     }
-  }
-  //This will handle fetch errors
-  _handleError(err) {
-    return Promise.reject(`Error: ${res.status}`).catch((err) => {
-      console.error(err); // log the error to the console
-    });
   }
 
   //GET /users/me – Get the current user’s info
@@ -81,6 +77,22 @@ export default class API {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({ avatar: url }),
+    }).then(this._handleResponse);
+  }
+
+  //7-PUT /cards/:cardId/likes – Like a card
+  setLiked(id) {
+    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+      method: "PUT",
+      headers: this._headers,
+    }).then(this._handleResponse);
+  }
+
+  //8-DELETE /cards/:cardId/likes – Dislike a card
+  removeLike(id) {
+    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+      method: "DELETE",
+      headers: this._headers,
     }).then(this._handleResponse);
   }
 

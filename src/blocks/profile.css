@@ -1,17 +1,23 @@
 .editicon-avatar-container {
   position: relative;
+  width: 120px;
+  height: 120px;
 }
 
 .editicon {
   opacity: 0;
   position: absolute;
+  border-radius: 50%;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.3s ease-in-out;
 }
 .editicon:hover {
-  opacity: 1;
+  opacity: 0.8;
   background-image: black;
   background: url(../images/EditIcon.svg) no-repeat center;
 }

@@ -17,7 +17,6 @@ const api = new API({
     "Content-Type": "application/json",
   },
 });
-
 console.log("testing!!!");
 //api.getInitialCards().then((res) => console.log(res));
 api.getUserInfo().then((res) => console.log("User Info is: ", res));
@@ -27,6 +26,8 @@ api.getUserInfo().then((res) => {
   console.log("res.name: ", res.name);
   console.log("res.about: ", res.about);
 
+  //update the avatar when you refresh the page
+  userInfo.setUserAvatar(res.avatar);
   userInfo.setUserInfo(res.name, res.about);
 });
 
@@ -109,7 +110,8 @@ const profileDescriptionInput = document.querySelector(
 const profileEditForm = document.forms["profile-edit-form"];
 //const addCardFormElement = addCardModal.querySelector(".modal__form");
 const addCardFormElement = document.forms["add-card-form"];
-
+const avatarEditForm = document.forms["avatar-edit-form"];
+console.log(avatarEditForm);
 const cardsWrap = document.querySelector(".cards__list");
 
 const cardTitleInput = addCardFormElement.querySelector(
@@ -131,14 +133,16 @@ const cardURLInput = addCardFormElement.querySelector(
 /* -------------------------------------------------------------------------- */
 /*                                  Validation                                */
 /* -------------------------------------------------------------------------- */
-//For both of the forms, we are creating 2 different validators
-//we are creating 2 instances of Form Validators
+//For both of the forms, we are creating 3 different validators
+//we are creating 3 instances of Form Validators i.e. one for each popup form
 //1-const profileEditForm = document.forms["profile-edit-form"]; already grabbed the constant
 const editFormValidator = new FormValidator(settings, profileEditForm);
 editFormValidator.enableValidation();
 //const addCardFormElement = document.forms["add-card-form"];
 const addFormValidator = new FormValidator(settings, addCardFormElement);
 addFormValidator.enableValidation();
+const avatarEditFormValidator = new FormValidator(settings, avatarEditForm);
+avatarEditFormValidator.enableValidation();
 
 /* -------------------------------------------------------------------------- */
 /*                                  Functions                                 */
@@ -217,7 +221,8 @@ function createCard(cardData) {
     handleImageClick,
     handleDeleteConfirmation,
     //handleCardDeleteClick
-    handleAvatarEditForm
+    //handleAvatarEditForm,
+    handleCardLike
   );
   return cardElement.getView();
 }
@@ -321,7 +326,7 @@ i.e. you have to append it
 const userInfo = new UserInfo(
   ".profile__title",
   ".profile__description",
-  "profile__image"
+  ".profile__image"
 );
 
 function handleProfileEditSubmit(inputValues) {
@@ -505,18 +510,58 @@ const editAvatarPopup = new PopupWithForm(
 );
 editAvatarPopup.setEventListeners();
 
-function handleAvatarEditForm(_getInputValues) {
+function handleAvatarEditForm(inputValues) {
   ///
   //console.log("hi");
 
   //console.log("_getInputValues: ", _getInputValues.url);
-  api.setUserAvatar(_getInputValues.url).then((res) => {
+  api.setUserAvatar(inputValues.url).then((res) => {
     console.log("res:", res);
-    console.log("_getInputValues.url:", _getInputValues.url);
-    userInfo.setUserAvatar(_getInputValues.url);
+    console.log("_getInputValues.url:", inputValues.url);
+    userInfo.setUserAvatar(inputValues.url);
     editAvatarPopup.close();
   });
 }
+//Edit Profile Avatar-Pseudocode://///////////////
+
+//Handle Card Like Pseudocode---
+// if card is white (not liked) then
+//  the api.updateLike is called
+//else the heart is black/(iked already)
+//then add the api to remove the like
+//?? do I pass card as parameter? or bypass it and use 'this'
+//since they look the same? i.e output is the same
+function handleCardLike(card) {
+  console.log("testing Like 123!");
+  console.log("this:", this);
+  console.log("card is liked:", card._isLiked);
+  console.log("card is unliked:", !card._isLiked);
+  console.log("this._name:", this._name, "this._isLiked:", this._isLiked);
+  if (!card._isLiked) {
+    api
+      .setLiked(card._id)
+      .then(() => {
+        console.log("yes123");
+        card.handleLikeIcon();
+      })
+      .catch((err) => {
+        console.error(err);
+        alert(`${err}`);
+      });
+  } else {
+    api
+      .removeLike(card._id)
+      .then(() => {
+        console.log("yes123");
+        card.handleLikeIcon();
+      })
+      .catch((err) => {
+        console.error(err);
+        alert(`${err}`);
+      });
+  }
+}
+
 //Iterate through the card data that we initially have and
 //run the function getCardElement on each index
 //initialCards.forEach((cardData) => renderCard(cardData, cardsWrap));
