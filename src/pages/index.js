@@ -330,28 +330,39 @@ const userInfo = new UserInfo(
 );
 
 function handleProfileEditSubmit(inputValues) {
+  editProfileModal.setLoading(true);
   console.log("inputValues:", inputValues);
-  api.updateUserInfo(inputValues).then((inputValues) => {
-    //console.log("res:", res);
+  api
+    .updateUserInfo(inputValues)
+    .then((inputValues) => {
+      //console.log("res:", res);
 
-    // console.log("res.name: ", res.name);
-    // console.log("res.about: ", res.about);
+      // console.log("res.name: ", res.name);
+      // console.log("res.about: ", res.about);
 
-    // console.log("res.description: ", res.description);
-    // console.log(888888888);
-    //UserInfo.setUserInfo(res.name, res.description);
-    userInfo.setUserInfo(inputValues.name, inputValues.about);
-  });
-
-  //userInfo.setUserInfo(profileTitleInput.value, profileDescriptionInput.value);
-  //console.log("profileTitleInput.value: " + profileTitleInput.value);
-  //profileTitle.textContent = profileTitleInput.value;
-  //console.log("profileTitle.textContent:" + profileTitle.textContent);
-  //profileDescription.textContent = profileDescriptionInput.value;
-  // call the .close()
-  editProfileModal.close();
-  //closeModal(profileEditModal);
+      // console.log("res.description: ", res.description);
+      // console.log(888888888);
+      //UserInfo.setUserInfo(res.name, res.description);
+      userInfo.setUserInfo(inputValues.name, inputValues.about);
+      editProfileModal.close();
+    })
+    .catch((err) => {
+      console.error(err);
+      alert(`${err}`);
+    })
+    .finally(() => {
+      editProfileModal.setLoading(false);
+    });
 }
+
+//userInfo.setUserInfo(profileTitleInput.value, profileDescriptionInput.value);
+//console.log("profileTitleInput.value: " + profileTitleInput.value);
+//profileTitle.textContent = profileTitleInput.value;
+//console.log("profileTitle.textContent:" + profileTitle.textContent);
+//profileDescription.textContent = profileDescriptionInput.value;
+// call the .close()
+//editProfileModal.close();
+//closeModal(profileEditModal);
 
 function fillProfileForm() {
   const infoObj = userInfo.getUserInfo();
@@ -384,12 +395,23 @@ function fillProfileForm() {
 3-close the popup */
 function handleAddCardFormSubmit(inputValues) {
   console.log(3333333, inputValues);
-  api.addCard(inputValues).then((cardData) => {
-    const card = createCard(cardData);
-    cardSection.addItem(card);
-    //console.log(card);
-    newCardModal.close();
-  });
+  //editProfileModal.setLoading(true);
+  newCardModal.setLoading(true);
+  api
+    .addCard(inputValues)
+    .then((cardData) => {
+      const card = createCard(cardData);
+      cardSection.addItem(card);
+      //console.log(card);
+      newCardModal.close();
+    })
+    .catch((err) => {
+      console.error(err);
+      alert(`${err}`);
+    })
+    .finally(() => {
+      newCardModal.setLoading(false);
+    });
 }
 
 /* -------------------------------------------------------------------------- */
@@ -485,9 +507,11 @@ deleteConfirmationModal.setEventListeners();
 //5-close the modal
 function handleDeleteConfirmation(card) {
   deleteConfirmationModal.open();
+
   deleteConfirmationModal.setSubmitAction(() => {
     api.deleteCard(card._id).then(() => {
       card.handleDeleteCard();
+
       deleteConfirmationModal.close();
     });
   });
@@ -513,14 +537,24 @@ editAvatarPopup.setEventListeners();
 function handleAvatarEditForm(inputValues) {
   ///
   //console.log("hi");
-
+  editAvatarPopup.setLoading(true);
   //console.log("_getInputValues: ", _getInputValues.url);
-  api.setUserAvatar(inputValues.url).then((res) => {
-    console.log("res:", res);
-    console.log("_getInputValues.url:", inputValues.url);
-    userInfo.setUserAvatar(inputValues.url);
-    editAvatarPopup.close();
-  });
+  api
+    .setUserAvatar(inputValues.url)
+    .then((res) => {
+      console.log("res:", res);
+      console.log("_getInputValues.url:", inputValues.url);
+      userInfo.setUserAvatar(inputValues.url);
+
+      editAvatarPopup.close();
+    })
+    .catch((err) => {
+      console.error(err);
+      alert(`${err}`);
+    })
+    .finally(() => {
+      editAvatarPopup.setLoading(false);
+    });
 }
 //Edit Profile Avatar-Pseudocode://///////////////
 

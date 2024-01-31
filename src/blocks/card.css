@@ -45,6 +45,8 @@
   border: none;
   cursor: pointer;
   transition: 0.4s;
+  margin-left: 16px;
+  flex: 0 0 21px;
 }
 
 .card__like-button_active {
