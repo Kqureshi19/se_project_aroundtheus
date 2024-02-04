@@ -21,4 +21,12 @@ export default class PopupWithConfirmation extends Popup {
       //this.close();
     });
   }
+
+  setLoading(isLoading) {
+    if (isLoading) {
+      this._submitButton.textContent = "Yes";
+    } else {
+      this._submitButton.textContent = "Deleting...";
+    }
+  }
 }

@@ -17,19 +17,25 @@ const api = new API({
     "Content-Type": "application/json",
   },
 });
-console.log("testing!!!");
+//console.log("testing!!!");
 //api.getInitialCards().then((res) => console.log(res));
-api.getUserInfo().then((res) => console.log("User Info is: ", res));
+//api.getUserInfo().then((res) => console.log("User Info is: ", res));
 
-api.getUserInfo().then((res) => {
-  console.log("res:", res);
-  console.log("res.name: ", res.name);
-  console.log("res.about: ", res.about);
+api
+  .getUserInfo()
+  .then((res) => {
+    console.log("res:", res);
+    console.log("res.name: ", res.name);
+    console.log("res.about: ", res.about);
 
-  //update the avatar when you refresh the page
-  userInfo.setUserAvatar(res.avatar);
-  userInfo.setUserInfo(res.name, res.about);
-});
+    //update the avatar when you refresh the page
+    userInfo.setUserAvatar(res.avatar);
+    userInfo.setUserInfo(res.name, res.about);
+  })
+  .catch((err) => {
+    console.error(err);
+    alert(`${err}`);
+  });
 
 // api.updateUserInfo(res).then((res) => {
 //   console.log("User Info is: ", res);
@@ -209,10 +215,10 @@ avatarEditFormValidator.enableValidation();
   wrapper.prepend(cardElement);
 } */
 
-function handleCardDeleteClick(data) {
-  //console.log(data);
-  api.deleteCard(data);
-}
+// function handleCardDeleteClick(data) {
+//   //console.log(data);
+//   api.deleteCard(data);
+// }
 
 function createCard(cardData) {
   const cardElement = new Card(
@@ -482,18 +488,24 @@ previewCardModalCloseButton.addEventListener("click", () =>
 //declare the variable cardSection, but its value is undefined
 //we define it moments later...
 let cardSection;
-api.getInitialCards().then((cards) => {
-  cardSection = new Section(
-    {
-      items: cards,
-      renderer: (cardData) => {
-        cardSection.addItem(createCard(cardData));
+api
+  .getInitialCards()
+  .then((cards) => {
+    cardSection = new Section(
+      {
+        items: cards,
+        renderer: (cardData) => {
+          cardSection.addItem(createCard(cardData));
+        },
       },
-    },
-    ".cards__list"
-  );
-  cardSection.renderItems();
-});
+      ".cards__list"
+    );
+    cardSection.renderItems();
+  })
+  .catch((err) => {
+    console.error(err);
+    alert(`${err}`);
+  });
 
 const deleteConfirmationModal = new PopupWithConfirmation(
   "#delete-confirmation-modal"
@@ -506,15 +518,30 @@ deleteConfirmationModal.setEventListeners();
 //4-if the API is successfull, it will delete from server, make sure to delete locally also
 //5-close the modal
 function handleDeleteConfirmation(card) {
+  deleteConfirmationModal.setLoading(true);
   deleteConfirmationModal.open();
 
   deleteConfirmationModal.setSubmitAction(() => {
-    api.deleteCard(card._id).then(() => {
-      card.handleDeleteCard();
+    api
+      .deleteCard(card._id)
+      .then(() => {
+        card.handleDeleteCard();
 
-      deleteConfirmationModal.close();
-    });
+        deleteConfirmationModal.close();
+        deleteConfirmationModal.setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        alert(`${err}`);
+      });
   });
+  // .catch((err) => {
+  //   console.error(err);
+  //   alert(`${err}`);
+  // });
+  // .finally(() => {
+  //   //deleteConfirmationModal.setLoading(false);
+  // });
 }
 
 //Edit Profile Avatar-Pseudocode:
@@ -574,9 +601,10 @@ function handleCardLike(card) {
   if (!card._isLiked) {
     api
       .setLiked(card._id)
-      .then(() => {
-        console.log("yes123");
-        card.handleLikeIcon();
+      .then((res) => {
+        console.log("res:", res);
+        console.log("res.isLiked:", res.isLiked);
+        card.setIsLiked(res.isLiked);
       })
       .catch((err) => {
         console.error(err);
@@ -585,9 +613,10 @@ function handleCardLike(card) {
   } else {
     api
       .removeLike(card._id)
-      .then(() => {
-        console.log("yes123");
-        card.handleLikeIcon();
+      .then((res) => {
+        console.log("res", res);
+        console.log("res.isLiked:", res.isLiked);
+        card.setIsLiked(res.isLiked);
       })
       .catch((err) => {
         console.error(err);

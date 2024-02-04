@@ -26,15 +26,7 @@ export default class API {
     return fetch(`${this._baseUrl}/cards`, {
       method: "GET",
       headers: this._headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      // if the server returns an error, reject the promise
-      return Promise.reject(`Error: ${res.status}`).catch((err) => {
-        console.error(err); // log the error to the console
-      });
-    });
+    }).then(this._handleResponse);
   }
 
   //PATCH /users/me – Update your profile information
@@ -103,6 +95,10 @@ export default class API {
   //4*-GET /cards – Get all cards
   //5*-POST /cards – Create a card
   //6*-DELETE /cards/:cardId – Delete a card
-  //7-PUT /cards/:cardId/likes – Like a card
-  //8-DELETE /cards/:cardId/likes – Dislike a card
+  //7*-PUT /cards/:cardId/likes – Like a card
+  //8*-DELETE /cards/:cardId/likes – Dislike a card
+
+  // when we call a js file, this should be cameCase
+  // BUT
+  // when you name a React component is shouldbe PascalCase
 }

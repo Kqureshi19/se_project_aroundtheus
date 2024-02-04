@@ -20,12 +20,12 @@ export default class Card {
     this._cardImage = this._cardElement.querySelector(".card__image");
     this._cardTitle = this._cardElement.querySelector(".card__title");
     this._likeButton = this._cardElement.querySelector(".card__like-button");
-    this.setLikeIcon();
+    this.changeLikeButtonState();
   }
 
   // setLikeButtonState() {
   //   if ((isLiked = true)) {
-  //     this.setLikeIcon();
+  //     this.changeLikeButtonState();
   //   }
   // }
 
@@ -34,14 +34,14 @@ export default class Card {
   //2. Delete Button
   //3. Preview Image
   _setEventListeners() {
-    //".card__like-button" this._setLikeIcon()
+    //".card__like-button" this._changeLikeButtonState()
     //1-Handle the Like Button
     this._cardElement
       .querySelector(".card__like-button")
       .addEventListener("click", () => {
         console.log(this._handleCardLike);
         this._handleCardLike(this);
-        this.setLikeIcon();
+        this.changeLikeButtonState();
       });
 
     //2-Handle the Delete Button
@@ -59,8 +59,8 @@ export default class Card {
       this._handleImageClick({ name: this._name, link: this._link });
     });
   }
-
-  setLikeIcon() {
+  // change setLikeIcon to changeLikeButtonState
+  changeLikeButtonState() {
     if (this._isLiked) {
       this._likeButton.classList.add("card__like-button_active");
     } else {
@@ -69,14 +69,15 @@ export default class Card {
   }
 
   //fyi, cardelement is the current card we are working with
-  handleLikeIcon() {
+  setIsLiked(isLiked) {
     // //console.log("Pressing Like Button from  card class");
     // this._cardElement
     //   .querySelector(".card__like-button")
     //   .classList.toggle("card__like-button_active");
     // //this._cardElement.classList.toggle("card__like-button_active");
-    this._isLiked = !this._isLiked;
-    this.setLikeIcon();
+    this._isLiked = isLiked;
+    //this._isLiked = !this._isLiked;
+    this.changeLikeButtonState();
   }
 
   handleDeleteCard() {
