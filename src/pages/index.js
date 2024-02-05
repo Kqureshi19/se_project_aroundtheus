@@ -528,20 +528,16 @@ function handleDeleteConfirmation(card) {
         card.handleDeleteCard();
 
         deleteConfirmationModal.close();
-        deleteConfirmationModal.setLoading(false);
+        //deleteConfirmationModal.setLoading(false);
       })
       .catch((err) => {
         console.error(err);
         alert(`${err}`);
+      })
+      .finally(() => {
+        deleteConfirmationModal.setLoading(false);
       });
   });
-  // .catch((err) => {
-  //   console.error(err);
-  //   alert(`${err}`);
-  // });
-  // .finally(() => {
-  //   //deleteConfirmationModal.setLoading(false);
-  // });
 }
 
 //Edit Profile Avatar-Pseudocode:

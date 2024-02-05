@@ -16,11 +16,12 @@ export default class Card {
     this._handleImageClick = handleImageClick;
     this._handleCardDeleteClick = handleCardDeleteClick;
     this._handleCardLike = handleCardLike;
-    this._cardElement = this._getElement();
-    this._cardImage = this._cardElement.querySelector(".card__image");
-    this._cardTitle = this._cardElement.querySelector(".card__title");
-    this._likeButton = this._cardElement.querySelector(".card__like-button");
-    this.changeLikeButtonState();
+
+    // this._cardElement = this._getElement();
+    // this._cardImage = this._cardElement.querySelector(".card__image");
+    // this._cardTitle = this._cardElement.querySelector(".card__title");
+    // this._likeButton = this._cardElement.querySelector(".card__like-button");
+    //this.changeLikeButtonState();
   }
 
   // setLikeButtonState() {
@@ -41,7 +42,7 @@ export default class Card {
       .addEventListener("click", () => {
         console.log(this._handleCardLike);
         this._handleCardLike(this);
-        this.changeLikeButtonState();
+        //this.changeLikeButtonState();
       });
 
     //2-Handle the Delete Button
@@ -97,14 +98,20 @@ export default class Card {
   //1.Grab the template first and clone it (i.e cardSelector = #card-template)
   //2. Add data to the template clone & call setEventListersn() method and return new card
   getView() {
-    // this._cardElement = this._getElement();
-    // this._cardImage = this._cardElement.querySelector(".card__image");
-    // this._cardTitle = this._cardElement.querySelector(".card__title");
+    //this._cardSelector = cardSelector; //this is the template of the card, i.e cardSelector = #card-template
+
+    this._cardElement = this._getElement();
+    this._cardImage = this._cardElement.querySelector(".card__image");
+    this._cardTitle = this._cardElement.querySelector(".card__title");
+    this._likeButton = this._cardElement.querySelector(".card__like-button");
+    this.changeLikeButtonState();
+
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     //console.log("right here");
     //console.log("cardSelector: ", this._cardSelector);
     this._cardTitle.textContent = this._name;
+    //this._cardElement = this._getElement();
 
     //console.log(cardElement);
     //This will add all the event listeners when the card is created
@@ -114,6 +121,7 @@ export default class Card {
     //2-set event listeners-we are invoking a method, so we are using this
     //there will be 3 event listenrs, like button, delete button, preview image
     //3-return the card
+
     return this._cardElement;
   }
 }
