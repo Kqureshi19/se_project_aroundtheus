@@ -24,9 +24,9 @@ export default class PopupWithConfirmation extends Popup {
 
   setLoading(isLoading) {
     if (isLoading) {
-      this._submitButton.textContent = "Yes";
-    } else {
       this._submitButton.textContent = "Deleting...";
+    } else {
+      this._submitButton.textContent = "Yes";
     }
   }
 }
