@@ -519,7 +519,7 @@ deleteConfirmationModal.setEventListeners();
 //5-close the modal
 function handleDeleteConfirmation(card) {
   deleteConfirmationModal.open();
-  deleteConfirmationModal.setLoading(false);
+  deleteConfirmationModal.setLoading(true);
   deleteConfirmationModal.setSubmitAction(() => {
     api
       .deleteCard(card._id)
@@ -534,7 +534,7 @@ function handleDeleteConfirmation(card) {
         alert(`${err}`);
       })
       .finally(() => {
-        deleteConfirmationModal.setLoading(true);
+        deleteConfirmationModal.setLoading(false);
       });
   });
 }
