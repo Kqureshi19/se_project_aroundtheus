@@ -518,16 +518,15 @@ deleteConfirmationModal.setEventListeners();
 //4-if the API is successfull, it will delete from server, make sure to delete locally also
 //5-close the modal
 function handleDeleteConfirmation(card) {
-  deleteConfirmationModal.setLoading(true);
   deleteConfirmationModal.open();
   deleteConfirmationModal.setSubmitAction(() => {
+    deleteConfirmationModal.setLoading(true);
     api
       .deleteCard(card._id)
       .then(() => {
         card.handleDeleteCard();
 
         deleteConfirmationModal.close();
-        //deleteConfirmationModal.setLoading(false);
       })
       .catch((err) => {
         console.error(err);
