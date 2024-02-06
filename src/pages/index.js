@@ -5,16 +5,50 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
+import API from "../components/API.js";
 import { initialCards, settings } from "../utils/constants.js";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 
+//This is a new instance of the API class
+const api = new API({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "7d078757-23ed-414e-a9d7-d63a6269c72c",
+    "Content-Type": "application/json",
+  },
+});
+//console.log("testing!!!");
+//api.getInitialCards().then((res) => console.log(res));
+//api.getUserInfo().then((res) => console.log("User Info is: ", res));
+
+api
+  .getUserInfo()
+  .then((res) => {
+    console.log("res:", res);
+    console.log("res.name: ", res.name);
+    console.log("res.about: ", res.about);
+
+    //update the avatar when you refresh the page
+    userInfo.setUserAvatar(res.avatar);
+    userInfo.setUserInfo(res.name, res.about);
+  })
+  .catch((err) => {
+    console.error(err);
+    alert(`${err}`);
+  });
+
+// api.updateUserInfo(res).then((res) => {
+//   console.log("User Info is: ", res);
+//   UserInfo.setUserInfo(res.name, res.description);
+// });
+
+//api.getUserInfo().then(userInfo); //=>{
+//   console.log("The User Info is :"+ userInfo);
+// }
 //Create instances of the classes
 //const CardPreview = new PopupWithImage(selectors.previewCardModal);
 
 //console.log(typeof initialCards);
-const cardData = {
-  name: "Lake Louise",
-  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-};
 
 /* -------------------------------------------------------------------------- */
 /*                                 Card-Card Class                            */
@@ -82,7 +116,8 @@ const profileDescriptionInput = document.querySelector(
 const profileEditForm = document.forms["profile-edit-form"];
 //const addCardFormElement = addCardModal.querySelector(".modal__form");
 const addCardFormElement = document.forms["add-card-form"];
-
+const avatarEditForm = document.forms["avatar-edit-form"];
+console.log(avatarEditForm);
 const cardsWrap = document.querySelector(".cards__list");
 
 const cardTitleInput = addCardFormElement.querySelector(
@@ -104,14 +139,16 @@ const cardURLInput = addCardFormElement.querySelector(
 /* -------------------------------------------------------------------------- */
 /*                                  Validation                                */
 /* -------------------------------------------------------------------------- */
-//For both of the forms, we are creating 2 different validators
-//we are creating 2 instances of Form Validators
+//For both of the forms, we are creating 3 different validators
+//we are creating 3 instances of Form Validators i.e. one for each popup form
 //1-const profileEditForm = document.forms["profile-edit-form"]; already grabbed the constant
 const editFormValidator = new FormValidator(settings, profileEditForm);
 editFormValidator.enableValidation();
 //const addCardFormElement = document.forms["add-card-form"];
 const addFormValidator = new FormValidator(settings, addCardFormElement);
 addFormValidator.enableValidation();
+const avatarEditFormValidator = new FormValidator(settings, avatarEditForm);
+avatarEditFormValidator.enableValidation();
 
 /* -------------------------------------------------------------------------- */
 /*                                  Functions                                 */
@@ -178,8 +215,21 @@ addFormValidator.enableValidation();
   wrapper.prepend(cardElement);
 } */
 
+// function handleCardDeleteClick(data) {
+//   //console.log(data);
+//   api.deleteCard(data);
+// }
+
 function createCard(cardData) {
-  const cardElement = new Card(cardData, "#card-template", handleImageClick);
+  const cardElement = new Card(
+    cardData,
+    "#card-template",
+    handleImageClick,
+    handleDeleteConfirmation,
+    //handleCardDeleteClick
+    //handleAvatarEditForm,
+    handleCardLike
+  );
   return cardElement.getView();
 }
 
@@ -188,6 +238,12 @@ function renderCard(cardData, wrapper) {
   //wrapper.prepend(cardElement);
   cardSection.addItem(cardElement);
 }
+
+/*
+ const confirmdelete click = new Popupwithform(
+  popupselector:
+ )
+*/
 
 //1-find delete button
 //2-add event listener to the delete button
@@ -273,21 +329,46 @@ i.e. you have to append it
 /*                               Event Handlers                               */
 /* -------------------------------------------------------------------------- */
 
-const userInfo = new UserInfo(".profile__title", ".profile__description");
+const userInfo = new UserInfo(
+  ".profile__title",
+  ".profile__description",
+  ".profile__image"
+);
 
 function handleProfileEditSubmit(inputValues) {
-  //console.log(e);
-  //e.preventDefault();
-  userInfo.setUserInfo(profileTitleInput.value, profileDescriptionInput.value);
-  console.log("profileTitleInput.value: " + profileTitleInput.value);
-  //profileTitle.textContent = profileTitleInput.value;
-  //console.log("profileTitle.textContent:" + profileTitle.textContent);
-  //profileDescription.textContent = profileDescriptionInput.value;
-  // call the .close()
-  editProfileModal.close();
-  //closeModal(profileEditModal);
-  return;
+  editProfileModal.setLoading(true);
+  console.log("inputValues:", inputValues);
+  api
+    .updateUserInfo(inputValues)
+    .then((inputValues) => {
+      //console.log("res:", res);
+
+      // console.log("res.name: ", res.name);
+      // console.log("res.about: ", res.about);
+
+      // console.log("res.description: ", res.description);
+      // console.log(888888888);
+      //UserInfo.setUserInfo(res.name, res.description);
+      userInfo.setUserInfo(inputValues.name, inputValues.about);
+      editProfileModal.close();
+    })
+    .catch((err) => {
+      console.error(err);
+      alert(`${err}`);
+    })
+    .finally(() => {
+      editProfileModal.setLoading(false);
+    });
 }
+
+//userInfo.setUserInfo(profileTitleInput.value, profileDescriptionInput.value);
+//console.log("profileTitleInput.value: " + profileTitleInput.value);
+//profileTitle.textContent = profileTitleInput.value;
+//console.log("profileTitle.textContent:" + profileTitle.textContent);
+//profileDescription.textContent = profileDescriptionInput.value;
+// call the .close()
+//editProfileModal.close();
+//closeModal(profileEditModal);
 
 function fillProfileForm() {
   const infoObj = userInfo.getUserInfo();
@@ -304,14 +385,39 @@ function fillProfileForm() {
   return;
 }
 
-function handleAddCardFormSubmit(e) {
-  console.log(e);
-  const name = cardTitleInput.value;
-  const link = cardURLInput.value;
-  renderCard({ name, link }, cardsWrap);
-  //closeModal(addCardModal);
-  newCardModal.close();
-  //addFormValidator.resetForm();
+// function handleAddCardFormSubmit(e) {
+//   console.log(e);
+//   const name = cardTitleInput.value;
+//   const link = cardURLInput.value;
+//   renderCard({ name, link }, cardsWrap);
+//   //closeModal(addCardModal);
+//   newCardModal.close();
+//   //addFormValidator.resetForm();
+// }
+
+/*api pseudocode:
+1-create the card
+2-add the card to the DOM
+3-close the popup */
+function handleAddCardFormSubmit(inputValues) {
+  console.log(3333333, inputValues);
+  //editProfileModal.setLoading(true);
+  newCardModal.setLoading(true);
+  api
+    .addCard(inputValues)
+    .then((cardData) => {
+      const card = createCard(cardData);
+      cardSection.addItem(card);
+      //console.log(card);
+      newCardModal.close();
+    })
+    .catch((err) => {
+      console.error(err);
+      alert(`${err}`);
+    })
+    .finally(() => {
+      newCardModal.setLoading(false);
+    });
 }
 
 /* -------------------------------------------------------------------------- */
@@ -367,16 +473,151 @@ previewCardModalCloseButton.addEventListener("click", () =>
 //comment out line 363 b/c the Section class will now do it
 //instantiating it only runs the constructor
 //inside renderer-create the card and then call section.add item and pass in new card
-const cardSection = new Section(
-  {
-    items: initialCards,
-    renderer: (cardData) => {
-      cardSection.addItem(createCard(cardData));
-    },
-  },
-  ".cards__list"
+
+// const cardSection = new Section(
+//   {
+//     items: initialCards,
+//     renderer: (cardData) => {
+//       cardSection.addItem(createCard(cardData));
+//     },
+//   },
+//   ".cards__list"
+// );
+// cardSection.renderItems();
+
+//declare the variable cardSection, but its value is undefined
+//we define it moments later...
+let cardSection;
+api
+  .getInitialCards()
+  .then((cards) => {
+    cardSection = new Section(
+      {
+        items: cards,
+        renderer: (cardData) => {
+          cardSection.addItem(createCard(cardData));
+        },
+      },
+      ".cards__list"
+    );
+    cardSection.renderItems();
+  })
+  .catch((err) => {
+    console.error(err);
+    alert(`${err}`);
+  });
+
+const deleteConfirmationModal = new PopupWithConfirmation(
+  "#delete-confirmation-modal"
 );
-cardSection.renderItems();
+deleteConfirmationModal.setEventListeners();
+
+//1-open the delete confirmation modal
+//2-call the modal's  setSubmitAction (its a public method)
+//3-call the API to delete the card from the server
+//4-if the API is successfull, it will delete from server, make sure to delete locally also
+//5-close the modal
+function handleDeleteConfirmation(card) {
+  deleteConfirmationModal.open();
+  deleteConfirmationModal.setSubmitAction(() => {
+    deleteConfirmationModal.setLoading(true);
+    api
+      .deleteCard(card._id)
+      .then(() => {
+        card.handleDeleteCard();
+
+        deleteConfirmationModal.close();
+      })
+      .catch((err) => {
+        console.error(err);
+        alert(`${err}`);
+      })
+      .finally(() => {
+        deleteConfirmationModal.setLoading(false);
+      });
+  });
+}
+
+//Edit Profile Avatar-Pseudocode:
+//1-Grab the editIcon button class & then add an event listener to it
+//2-Add event listner with  "click", the edit popup avatar form should open
+//3-Instantiate thew editAvatarPopup form using the class PopupWithForm
+
+const editAvatarButton = document.querySelector(".editicon");
+editAvatarButton.addEventListener("click", () => {
+  console.log("you clicked on editAvatarButton");
+  editAvatarPopup.open();
+});
+
+const editAvatarPopup = new PopupWithForm(
+  "#edit-avatar-modal",
+  handleAvatarEditForm
+);
+editAvatarPopup.setEventListeners();
+
+function handleAvatarEditForm(inputValues) {
+  ///
+  //console.log("hi");
+  editAvatarPopup.setLoading(true);
+  //console.log("_getInputValues: ", _getInputValues.url);
+  api
+    .setUserAvatar(inputValues.url)
+    .then((res) => {
+      console.log("res:", res);
+      console.log("_getInputValues.url:", inputValues.url);
+      userInfo.setUserAvatar(inputValues.url);
+
+      editAvatarPopup.close();
+    })
+    .catch((err) => {
+      console.error(err);
+      alert(`${err}`);
+    })
+    .finally(() => {
+      editAvatarPopup.setLoading(false);
+    });
+}
+//Edit Profile Avatar-Pseudocode://///////////////
+
+//Handle Card Like Pseudocode---
+// if card is white (not liked) then
+//  the api.updateLike is called
+//else the heart is black/(iked already)
+//then add the api to remove the like
+//?? do I pass card as parameter? or bypass it and use 'this'
+//since they look the same? i.e output is the same
+function handleCardLike(card) {
+  console.log("testing Like 123!");
+  console.log("this:", this);
+  console.log("card is liked:", card._isLiked);
+  console.log("card is unliked:", !card._isLiked);
+  console.log("this._name:", this._name, "this._isLiked:", this._isLiked);
+  if (!card._isLiked) {
+    api
+      .setLiked(card._id)
+      .then((res) => {
+        console.log("res:", res);
+        console.log("res.isLiked:", res.isLiked);
+        card.setIsLiked(res.isLiked);
+      })
+      .catch((err) => {
+        console.error(err);
+        alert(`${err}`);
+      });
+  } else {
+    api
+      .removeLike(card._id)
+      .then((res) => {
+        console.log("res", res);
+        console.log("res.isLiked:", res.isLiked);
+        card.setIsLiked(res.isLiked);
+      })
+      .catch((err) => {
+        console.error(err);
+        alert(`${err}`);
+      });
+  }
+}
 
 //Iterate through the card data that we initially have and
 //run the function getCardElement on each index
@@ -388,3 +629,5 @@ likeButtons.forEach((likeButton) => {
     likeButton.classList.toggle("card__like-button_active");
   });
 }); */
+
+console.log("testing98");

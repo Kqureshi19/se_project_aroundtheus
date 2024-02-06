@@ -2,7 +2,7 @@
 //purpose: add elements to the DOM
 export default class Section {
   constructor({ items, renderer }, containerSelector) {
-    this._items = items; //array of data-which adds to the page when it loads
+    this._items = items;
     this._renderer = renderer; // function that creates/adds single item to a page
     this._container = document.querySelector(containerSelector); //CSS class selector, where you add the card elements
   }
@@ -14,7 +14,6 @@ export default class Section {
     this._items.forEach((item) => {
       this._renderer(item);
     });
-    console.log("this._items is:" + this._items);
   }
 
   //takes DOM element & adds it to the container

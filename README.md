@@ -1,9 +1,11 @@
 # Triple Peaks Around the U.S.
 
-This is the third project of the Software Engineering program at TripleTen. It was created using HTML and CSS, based on the design brief.
+This is the ninth project of the Software Engineering program at TripleTen. It was created using JavaScript, HTML and CSS, based on the design brief.
 
 ## Project features
 
+- JavaScript ES6
+- API
 - Semantic HTML5
 - Flexbox
 - Positioning

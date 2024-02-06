@@ -20,11 +20,15 @@
       </header>
       <main class="content">
         <section class="profile page__section">
-          <img
-            src="<%=require('./images/jacques-cousteau.jpg')%>"
-            alt="Avatar"
-            class="profile__image"
-          />
+          <div class="editicon-avatar-container">
+            <button class="editicon"></button>
+            <img
+              src="<%=require('./images/jacques-cousteau.jpg')%>"
+              alt="Avatar"
+              class="profile__image"
+            />
+          </div>
+
           <div class="profile__info">
             <h1 class="profile__title">Jacques Cousteau</h1>
             <button
@@ -74,7 +78,7 @@
           <label class="modal__label">
             <input
               class="modal__input"
-              name="title"
+              name="name"
               id="profile-title-input"
               placeholder="Name"
               type="text"
@@ -87,7 +91,7 @@
           <label class="modal__label">
             <input
               class="modal__input"
-              name="description"
+              name="about"
               id="profile-description-input"
               placeholder="Description"
               type="text"
@@ -117,7 +121,7 @@
           <label class="modal__label">
             <input
               class="modal__input modal__input_type_title"
-              name="title"
+              name="name"
               id="add-card-form"
               placeholder="Title"
               type="text"
@@ -144,6 +148,52 @@
           >
             Create
           </button>
+        </form>
+      </div>
+    </div>
+    <!--Delete Confirmation Modal-->
+    <div class="modal" id="delete-confirmation-modal">
+      <div class="modal__container">
+        <button
+          class="modal__close"
+          id="profile-edit-modal-close-button"
+          type="button"
+        ></button>
+        <h2 class="modal__heading">Are you sure?</h2>
+        <form
+          class="modal__form"
+          name="profile-edit-form"
+          id="delete-card-confirmation-form"
+        >
+          <button class="modal__save-button" type="submit">Yes</button>
+        </form>
+      </div>
+    </div>
+    <!--Edit Avatar Modal -->
+    <div class="modal" id="edit-avatar-modal">
+      <div class="modal__container">
+        <button
+          class="modal__close"
+          id="profile-edit-modal-close-button"
+          type="button"
+        ></button>
+        <h2 class="modal__heading">Change profile picture</h2>
+        <form class="modal__form" name="avatar-edit-form" id="edit-card-form">
+          <label class="modal__label">
+            <input
+              class="modal__input"
+              name="url"
+              id="avatar-edit-form"
+              placeholder="Image url"
+              type="url"
+              minlength="2"
+              maxlength="999"
+              required
+            />
+            <span class="modal__error" id="avatar-edit-form-error"></span>
+          </label>
+
+          <button class="modal__save-button" type="submit">Save</button>
         </form>
       </div>
     </div>

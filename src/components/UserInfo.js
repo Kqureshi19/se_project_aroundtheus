@@ -1,11 +1,12 @@
 //UserInfo class is responsible for rendering information about the user on the page
 
 export default class UserInfo {
-  constructor(profileNameSelector, profileDescriptionSelector) {
+  constructor(profileNameSelector, profileDescriptionSelector, avatarSelector) {
     this._profileNameElement = document.querySelector(profileNameSelector);
     this._profileDescriptionElement = document.querySelector(
       profileDescriptionSelector
     );
+    this._avatar = document.querySelector(avatarSelector);
   }
 
   /**
@@ -24,6 +25,11 @@ export default class UserInfo {
   setUserInfo(name, description) {
     this._profileNameElement.textContent = name;
     this._profileDescriptionElement.textContent = description;
+  }
+
+  //set the new avatar as the profile image
+  setUserAvatar(avatar) {
+    this._avatar.src = avatar;
   }
 }
 

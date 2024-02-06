@@ -8,6 +8,7 @@ export default class PopupWithForm extends Popup {
     super({ popupSelector });
     this._popupForm = this._popupElement.querySelector(".modal__form");
     this._handleFormSubmit = handleFormSubmit;
+    this._submitButton = this._popupForm.querySelector(".modal__save-button");
   }
   //can remove this 13-16
   close() {
@@ -24,6 +25,16 @@ export default class PopupWithForm extends Popup {
       formDataObj[inputElement.name] = inputElement.value; //add a fieldname:fieldvalue pair as an object
     });
     return formDataObj; //returns data as an object
+  }
+
+  //public method that will be used by the popups in index.js
+  //to indiate it is 'saving' the information on the modal/popup
+  setLoading(isLoading) {
+    if (isLoading) {
+      this._submitButton.textContent = "Saving...";
+    } else {
+      this._submitButton.textContent = "Save";
+    }
   }
 
   //overrides setEventListeners() parent method
